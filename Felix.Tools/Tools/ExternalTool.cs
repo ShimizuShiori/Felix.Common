@@ -2,7 +2,7 @@
 
 namespace Felix.Tools.Tools
 {
-	class ExternalTool : ITool
+	class ExternalTool : SyncTool
 	{
 		readonly string exec;
 		readonly string arg;
@@ -13,7 +13,7 @@ namespace Felix.Tools.Tools
 			this.arg = arg;
 		}
 
-		public void Start()
+		protected override void Start()
 		{
 			string realExec = exec;
 			string realArg = arg;

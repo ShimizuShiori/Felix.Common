@@ -3,9 +3,9 @@
 namespace Felix.Tools.Tools
 {
 	[Tool("On TFS", "Search")]
-	class SearchInTFS : ITool
+	class SearchInTFS : SyncTool
 	{
-		public void Start()
+		protected override void Start()
 		{
 			var repos = new string[]
 			{

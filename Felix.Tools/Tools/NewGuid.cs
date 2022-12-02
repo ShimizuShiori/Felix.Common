@@ -1,9 +1,9 @@
 ﻿namespace Felix.Tools.Tools
 {
 	[Tool("NewGuid", "C#")]
-	class NewGuid : ITool
+	class NewGuid : SyncTool
 	{
-		public void Start()
+		protected override void Start()
 		{
 			Clipboard.SetText(Guid.NewGuid().ToString());
 		}

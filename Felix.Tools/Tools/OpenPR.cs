@@ -3,7 +3,7 @@
 namespace Felix.Tools.Tools
 {
 	[Tool("PR", "Repo")]
-	class OpenPR : ITool
+	class OpenPR : SyncTool
 	{
 		const string urlFormat = @"https://devops.wisetechglobal.com/wtg/{0}/_git/{1}/pullrequests";
 
@@ -11,7 +11,7 @@ namespace Felix.Tools.Tools
 		{
 			("CargoWise", new string[] { "Dev", "Shared" })
 		};
-		public void Start()
+		protected override void Start()
 		{
 			var selected = ChooesForm<(string, string[])>.Show(
 				"Select Repo"
