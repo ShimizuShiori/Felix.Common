@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="CategoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ChooesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="SelectToolForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ToolForms\FindClassInTFSForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ToolForms\MyIdleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ToolForms\FindByEverythingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ToolForms\MoveMouseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ToolForms\UnLockerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ToolForms\XmlConvertForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

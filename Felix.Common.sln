@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Felix.Common", "Felix.Common\Felix.Common.csproj", "{285A0806-DA76-41DE-B224-29832BD7B4C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4385D733-282B-4A6D-9980-E5CD74CABD57}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleExTest", "ConsoleExTest\ConsoleExTest.csproj", "{AA012B68-D467-4F9A-AA98-ED2DF4060A0C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoveMouse", "MoveMouse\MoveMouse.csproj", "{AF6E6F86-6817-4E48-9991-C259E02F4BE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{D366D28C-23D7-4345-8CE4-B9621B6EDB63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Felix.Tools", "Felix.Tools\Felix.Tools.csproj", "{68DEC349-566D-4E76-A87B-92264B91CB92}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{285A0806-DA76-41DE-B224-29832BD7B4C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{285A0806-DA76-41DE-B224-29832BD7B4C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{285A0806-DA76-41DE-B224-29832BD7B4C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{285A0806-DA76-41DE-B224-29832BD7B4C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA012B68-D467-4F9A-AA98-ED2DF4060A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA012B68-D467-4F9A-AA98-ED2DF4060A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA012B68-D467-4F9A-AA98-ED2DF4060A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA012B68-D467-4F9A-AA98-ED2DF4060A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF6E6F86-6817-4E48-9991-C259E02F4BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF6E6F86-6817-4E48-9991-C259E02F4BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF6E6F86-6817-4E48-9991-C259E02F4BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF6E6F86-6817-4E48-9991-C259E02F4BE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68DEC349-566D-4E76-A87B-92264B91CB92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68DEC349-566D-4E76-A87B-92264B91CB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68DEC349-566D-4E76-A87B-92264B91CB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68DEC349-566D-4E76-A87B-92264B91CB92}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AA012B68-D467-4F9A-AA98-ED2DF4060A0C} = {4385D733-282B-4A6D-9980-E5CD74CABD57}
+		{AF6E6F86-6817-4E48-9991-C259E02F4BE2} = {4385D733-282B-4A6D-9980-E5CD74CABD57}
+		{68DEC349-566D-4E76-A87B-92264B91CB92} = {D366D28C-23D7-4345-8CE4-B9621B6EDB63}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {22DEE8C2-EB07-4BEF-B2C6-94C0FA3549EE}
+	EndGlobalSection
+EndGlobal
