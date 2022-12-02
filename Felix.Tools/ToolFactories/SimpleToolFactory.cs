@@ -10,6 +10,8 @@ namespace Felix.Tools.ToolFactories
 		{
 			tools = Assembly.GetExecutingAssembly()
 				.GetTypes()
+				.Where(x => typeof(ITool).IsAssignableFrom(x))
+				.Where(x => x.IsClass && !x.IsAbstract)
 				.Select(x => new ToolInfo(
 					x.GetCustomAttribute<ToolAttribute>() ?? ToolAttribute.Empty,
 					x

@@ -9,12 +9,29 @@ namespace ConsoleExTest
 
 		static void Main(string[] args)
 		{
-			var p = User32.FindWindow(null, "*Untitled - Notepad");
-			// CargoWise One - ediProd - Branch: China - Company: WiseTech Global (Australia) Pty Ltd - Department: Development (Felix.Fei@wtg.zone@AU2CO-SRDH-002.wtg.zone)
+			var p = User32.FindWindow(null, "CargoWise One - ediProd - Branch: China - Company: WiseTech Global (Australia) Pty Ltd - Department: Development (Felix.Fei@wtg.zone@AU2CO-SRDH-002.wtg.zone)");
+			//p = User32.FindWindowEx(p, IntPtr.Zero, "Edit", null);
+			//Console.WriteLine(p);
 			Console.WriteLine(p);
-
 			User32.SetForegroundWindow(p);
-			User32.SendMessage(p, User32.WM_KEYDOWN, 0x400000F, 0x002907C2);
+			//User32.PostMessage((int)p, User32.WM_CHAR, 'a', 0);
+			//User32.PostMessage((int)p, User32.WM_CHAR, 'b', 0);
+
+			//User32.PostMessage((int)p, 0x0112, 0xF100, 0x0046);
+			User32.PostMessage((int)p, User32.WM_CHAR, 0x70, 0);
+
+			//User32.PostMessage((int)p, User32.WM_SYSKEYDOWN, 0x11, 1);
+			//Thread.Sleep(50);
+			//User32.PostMessage((int)p, User32.WM_KEYDOWN, 's', 0);
+			//Thread.Sleep(1000);
+			//User32.PostMessage((int)p, User32.WM_KEYUP, 's', 0);
+
+			//User32.PostMessage((int)p, User32.WM_SYSKEYDOWN, 0x11, 1);
+			//User32.PostMessage((int)p, User32.WM_KEYDOWN, 0x53, 1);
+			//User32.PostMessage((int)p, User32.WM_KEYUP, 0x53, 1);
+			//User32.PostMessage((int)p, User32.WM_SYSKEYUP, 0x11, 1);
+
+			// CargoWise One - ediProd - Branch: China - Company: WiseTech Global (Australia) Pty Ltd - Department: Development (Felix.Fei@wtg.zone@AU2CO-SRDH-002.wtg.zone)
 			//User32.SendMessageA(p, User32.WM_KEYDOWN, 0x5A, 1);
 
 			//var p = User32.FindWindow(null, "CargoWise One - ediProd - Branch: China - Company: WiseTech Global (Australia) Pty Ltd - Department: Development (Felix.Fei@wtg.zone@AU2CO-SRDH-002.wtg.zone");

@@ -17,7 +17,14 @@ namespace Felix.Tools
 			this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 			this.AutoSize = true;
 			this.TopMost = true;
+			this.Shown += ChooesForm_Shown;
 			DrawButtons();
+		}
+
+		private void ChooesForm_Shown(object? sender, EventArgs e)
+		{
+			if (buttons.Count == 2)
+				buttons[0].PerformClick();
 		}
 
 		void DrawButtons()
@@ -49,6 +56,10 @@ namespace Felix.Tools
 					break;
 			}
 			this.buttons[0].Focus();
+			if (this.buttons.Count == 2)
+			{
+				this.buttons[0].PerformClick();
+			}
 		}
 
 		void DrawExitButton(int rowIndex, int colIndex)
