@@ -1,4 +1,6 @@
-﻿namespace Felix.Tools.Tools
+﻿using Felix.Tools.Attributes;
+
+namespace Felix.Tools.Tools
 {
 	[Tool("NewGuid", "C#")]
 	class NewGuid : SyncTool

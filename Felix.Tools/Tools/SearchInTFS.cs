@@ -1,9 +1,10 @@
 ﻿using Felix.Common;
+using Felix.Tools.Attributes;
 using Felix.Tools.SharedInfos;
 
 namespace Felix.Tools.Tools
 {
-	[Tool("TFS", "Search")]
+	[TextTool("TFS", "Search")]
 	class SearchInTFS : SyncTool
 	{
 		protected override void Start()

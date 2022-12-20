@@ -23,8 +23,8 @@ namespace Felix.Tools
 
 		private void ChooesForm_Shown(object? sender, EventArgs e)
 		{
-			if (buttons.Count == 2)
-				buttons[0].PerformClick();
+			//if (buttons.Count == 2)
+			//	buttons[0].PerformClick();
 		}
 
 		void DrawButtons()

@@ -1,8 +1,9 @@
-﻿using System.Diagnostics;
+﻿using Felix.Tools.Attributes;
+using System.Diagnostics;
 
 namespace Felix.Tools.Tools
 {
-	[Tool("Everythin", "Search")]
+	[TextTool("Everythin", "Search")]
 	class SearchInEverything : ITool
 	{
 		public async Task StartAsync()

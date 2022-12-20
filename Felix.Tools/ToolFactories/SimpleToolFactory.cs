@@ -1,4 +1,5 @@
-﻿using Felix.Tools.Tools;
+﻿using Felix.Tools.Attributes;
+using Felix.Tools.Tools;
 using System.Reflection;
 
 namespace Felix.Tools.ToolFactories
@@ -36,13 +37,15 @@ namespace Felix.Tools.ToolFactories
 
 		public IEnumerable<string> GetCategories()
 		{
-			return tools.Select(x => x.Attribute.Category);
+			return tools
+				.Where(x => x.Attribute.Show())
+				.Select(x => x.Attribute.Category);
 		}
 
 		public IEnumerable<ToolInfo> GetToolInfosByCategory(string categoryName)
 		{
 			return tools
-				.Where(x => x.Attribute.Category == categoryName);
+				.Where(x => x.Attribute.Show() && x.Attribute.Category == categoryName);
 		}
 	}
 }

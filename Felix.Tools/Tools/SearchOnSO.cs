@@ -1,8 +1,9 @@
 ﻿using Felix.Common;
+using Felix.Tools.Attributes;
 
 namespace Felix.Tools.Tools
 {
-	[Tool("SO", "Search")]
+	[TextTool("SO", "Search")]
 	class SearchOnSO : SyncTool
 	{
 		const string urlFormat = @"https://stackoverflow.com/c/wisetechglobal/search?q={0}&searchOn=1";

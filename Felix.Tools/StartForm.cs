@@ -27,14 +27,8 @@ namespace Felix.Tools
 					{
 						case 1:
 							SendKeys.SendWait("^c");
-							if (Clipboard.ContainsText())
-							{
-								StartWorkWithSelectedText(Clipboard.GetText());
-							}
-							else if (Clipboard.GetFileDropList().Count > 0)
-							{
-								StartWorkWithSelectedText(Clipboard.GetFileDropList()[0]);
-							}
+							AppContext.CopiedInfo = CopiedInfoFactory.Create();
+							StartWorkWithSelectedCopiedInfo();
 							break;
 						default:
 							break;
@@ -46,9 +40,8 @@ namespace Felix.Tools
 			base.WndProc(ref m);
 		}
 
-		private void StartWorkWithSelectedText(string selectedText)
+		private void StartWorkWithSelectedCopiedInfo()
 		{
-			AppContext.SelectedText = selectedText.Trim();
 			using (var form = new CategoryForm())
 			{
 				form.ShowDialog();
