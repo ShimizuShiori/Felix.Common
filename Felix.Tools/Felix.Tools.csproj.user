@@ -7,10 +7,13 @@
     <Compile Update="ChooesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Form1.cs">
+    <Compile Update="StartForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="OutputBox.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="SelectToolForm.cs">

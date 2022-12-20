@@ -1,21 +1,19 @@
 ﻿using Felix.Common;
+using Felix.Tools.SharedInfos;
 
 namespace Felix.Tools.Tools
 {
-	[Tool("On TFS", "Search")]
+	[Tool("TFS", "Search")]
 	class SearchInTFS : SyncTool
 	{
 		protected override void Start()
 		{
-			var repos = new string[]
-			{
-				"All",
-				"CargoWise"
-			};
 			var mode = new (string, string)[]
 			{
-				("Normal", "{0}"),
-				("BaseType", "basetype: {0}")
+				("All", "\"{0}\""),
+				("BaseType", "basetype: {0}"),
+				("Caller", "caller: {0}"),
+				("Def", "def: {0}")
 			};
 
 			var selectedFormat = ChooesForm<string>.Show(
@@ -26,9 +24,10 @@ namespace Felix.Tools.Tools
 				return;
 
 			var selectedRepo = ChooesForm<string>.Show(
-				"Select Repo",
-				repos.ToMap(x => (x, x)),
-				string.Empty);
+				TFSInfos.GetProjects().Concat(new string[]
+				{
+					"All"
+				}));
 			if (selectedRepo == string.Empty)
 				return;
 

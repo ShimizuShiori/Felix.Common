@@ -3,9 +3,9 @@ using System.ComponentModel;
 
 namespace Felix.Tools
 {
-	public partial class Form1 : Form
+	public partial class StartForm : Form
 	{
-		public Form1()
+		public StartForm()
 		{
 			InitializeComponent();
 

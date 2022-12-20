@@ -5,7 +5,8 @@
 	{
 		protected override void Start()
 		{
-			Clipboard.SetText(Guid.NewGuid().ToString());
+			//Clipboard.SetText(Guid.NewGuid().ToString());
+			OutputBox.Show(Guid.NewGuid().ToString());
 		}
 	}
 }

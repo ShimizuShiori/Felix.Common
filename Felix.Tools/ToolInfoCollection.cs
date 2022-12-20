@@ -9,7 +9,7 @@ namespace Felix.Tools
 
 		static ToolInfoCollection()
 		{
-			ToolInfos = typeof(Form1).Assembly.GetTypes()
+			ToolInfos = typeof(StartForm).Assembly.GetTypes()
 				.Where(t => typeof(Form).IsAssignableFrom(t) || typeof(ITool).IsAssignableFrom(t))
 				.Where(t => !t.IsAbstract)
 				.Select(t => new ToolInfo(t.GetCustomAttribute<ToolAttribute>() ?? ToolAttribute.Empty, t))

@@ -1,4 +1,5 @@
 ﻿using Felix.Common;
+using Felix.Tools.SharedInfos;
 
 namespace Felix.Tools.Tools
 {
@@ -6,28 +7,19 @@ namespace Felix.Tools.Tools
 	class OpenPR : SyncTool
 	{
 		const string urlFormat = @"https://devops.wisetechglobal.com/wtg/{0}/_git/{1}/pullrequests";
-
-		static readonly (string, string[])[] repos = new (string, string[])[]
-		{
-			("CargoWise", new string[] { "Dev", "Shared" })
-		};
 		protected override void Start()
 		{
 			var selected = ChooesForm<(string, string[])>.Show(
-				"Select Repo"
-				, repos.ToMap(x => (x.Item1, x))
-				, ("", Array.Empty<string>()));
-			if (selected.Item2.Length == 0)
+				TFSInfos.GetProjects());
+
+			if (selected == "")
 				return;
-			var selected2 = ChooesForm<string>.Show(
-				"Select Repo",
-				selected.Item2.ToMap(x => (x, x)),
-				""
-			);
+
+			var selected2 = ChooesForm<string>.Show(TFSInfos.GetRepos(selected));
 			if (selected2 == "")
 				return;
 
-			UrlHelper.Open(string.Format(urlFormat, selected.Item1, selected2));
+			UrlHelper.Open(string.Format(urlFormat, selected, selected2));
 		}
 	}
 }

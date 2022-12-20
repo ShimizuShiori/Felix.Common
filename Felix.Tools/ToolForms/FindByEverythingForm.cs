@@ -11,7 +11,6 @@ using System.Windows.Forms;
 
 namespace Felix.Tools.ToolForms
 {
-	[Tool("Everything", "Search")]
 	public partial class FindByEverythingForm : Form
 	{
 		public FindByEverythingForm()
@@ -20,8 +19,9 @@ namespace Felix.Tools.ToolForms
 			this.Shown += FindByEverythingForm_Shown;
 		}
 
-		private void FindByEverythingForm_Shown(object? sender, EventArgs e)
+		private async void FindByEverythingForm_Shown(object? sender, EventArgs e)
 		{
+			this.Hide();
 			ProcessStartInfo psi = new ProcessStartInfo();
 			psi.FileName = @"C:\Program Files\Everything\Everything.exe";
 			psi.Arguments = $"-s {AppContext.SelectedText}";
@@ -29,6 +29,13 @@ namespace Felix.Tools.ToolForms
 			{
 				p.StartInfo = psi;
 				p.Start();
+				await Task.Delay(TimeSpan.FromSeconds(10));
+				using (var p2 = new Process())
+				{
+					p2.StartInfo.FileName = @"C:\Program Files\Everything\Everything.exe";
+					p2.StartInfo.Arguments = "-close";
+					p2.Start();
+				}
 			}
 			this.Close();
 		}

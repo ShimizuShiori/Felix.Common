@@ -133,7 +133,15 @@ namespace Felix.Tools
 				}
 				return form._choices[form.selectedKey];
 			}
+		}
 
+		public static string Show(params string[] values)
+		{
+			return ChooesForm<string>.Show("", values.ToMap(x => (x, x)), string.Empty);
+		}
+		public static string Show(IEnumerable<string> values)
+		{
+			return ChooesForm<string>.Show("", values.ToMap(x => (x, x)), string.Empty);
 		}
 	}
 }
