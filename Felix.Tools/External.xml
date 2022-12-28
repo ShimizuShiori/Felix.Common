@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Tools>
-  <Tool Category="FS" Name="MarkText">
+  <Tool Category="Open" Name="MarkText">
     <Exec>C:\Users\Felix.Fei\AppData\Local\Programs\MarkText\MarkText.exe</Exec>
     <Arg>"{SelectedText}"</Arg>
   </Tool>

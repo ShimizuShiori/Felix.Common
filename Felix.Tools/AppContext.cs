@@ -8,6 +8,7 @@ namespace Felix.Tools
 		public static string SelectedCategory { get; set; } = string.Empty;
 		public static IToolFactory ToolFactory { get; } = new ToolFactory();
 		public static JobCounter JobCounter { get; } = new JobCounter();
+		public static Random Random { get; } = new Random();
 		public static string SelectedText
 		{
 			get
