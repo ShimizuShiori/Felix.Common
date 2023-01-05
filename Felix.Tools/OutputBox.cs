@@ -40,5 +40,15 @@ namespace Felix.Tools
 		{
 			Clipboard.SetText(this.text);
 		}
+
+		private void timer1_Tick(object sender, EventArgs e)
+		{
+			this.Close();
+		}
+
+		private void OutputBox_Shown(object sender, EventArgs e)
+		{
+			timer1.Enabled = true;
+		}
 	}
 }

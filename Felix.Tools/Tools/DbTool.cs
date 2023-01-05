@@ -6,18 +6,24 @@ namespace Felix.Tools.Tools
 {
 	abstract class DbTool : ITool
 	{
+		protected const string DbNameOdyssey = "Odyssey";
+		protected virtual bool NeedToSelectADb { get; } = true;
+
 		protected string[] DbNameList = new string[]
 		{
-			"Odyssey"
+			DbNameOdyssey
 		};
 
 		public async Task StartAsync()
 		{
 			var builder = new SqlConnectionStringBuilder();
 			builder.DataSource = ".";
-			builder.InitialCatalog = ChooesForm<string>.Show("",
-				DbNameList.ToMap(x => (x, x)),
-				"");
+			builder.InitialCatalog = NeedToSelectADb
+				? ChooesForm<string>.Show(
+					"",
+					DbNameList.ToMap(x => (x, x)),
+					"")
+				: DbNameOdyssey;
 			if (builder.InitialCatalog == "")
 				return;
 			builder.IntegratedSecurity = true;

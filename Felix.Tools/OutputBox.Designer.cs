@@ -28,11 +28,13 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.button1 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			this.tableLayoutPanel1.SuspendLayout();
 			this.flowLayoutPanel1.SuspendLayout();
 			this.SuspendLayout();
@@ -95,6 +97,11 @@
 			this.textBox1.Size = new System.Drawing.Size(794, 344);
 			this.textBox1.TabIndex = 1;
 			// 
+			// timer1
+			// 
+			this.timer1.Interval = 30000;
+			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+			// 
 			// OutputBox
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
@@ -104,6 +111,7 @@
 			this.Name = "OutputBox";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Output";
+			this.Shown += new System.EventHandler(this.OutputBox_Shown);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			this.flowLayoutPanel1.ResumeLayout(false);
@@ -118,5 +126,6 @@
 		private Button button1;
 		private Button button2;
 		private TextBox textBox1;
+		private System.Windows.Forms.Timer timer1;
 	}
 }
