@@ -4,9 +4,6 @@
     <Exec>C:\Users\Felix.Fei\AppData\Local\Programs\MarkText\MarkText.exe</Exec>
     <Arg>"{SelectedText}"</Arg>
   </Tool>
-  <Tool Category="EdiProd" Name="PAVE">
-    <Exec>https://svc-ediprod.wtg.zone/Services/link/ShowEditForm/VisualBoard/5bcd59a2-8961-49b5-adeb-f5d1df753aa8?lang=en-gb</Exec>
-  </Tool>
   <Tool Category="Repo" Name="CW Tool">
     <Exec>C:\Tools\CW Tools\CW Tools.exe</Exec>
   </Tool>
