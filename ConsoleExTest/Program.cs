@@ -11,6 +11,7 @@ namespace ConsoleExTest
 
 		static void Main(string[] args)
 		{
+			var ps = Process.GetProcessesByName("firefox");
 			string str = "/api/user/password/reset_request?t=1671007875";
 
 			Console.WriteLine(DateTimeOffset.Now.ToUnixTimeSeconds());
