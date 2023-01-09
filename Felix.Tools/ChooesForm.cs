@@ -95,6 +95,10 @@ namespace Felix.Tools
 				DrawButtons();
 				return;
 			}
+			if (e.KeyChar == (char)27)
+			{
+				this.Close();
+			}
 		}
 
 		void DrawButton(IDictionary<string, T> choicesForDraw, int rowIndex, int colIndex, IOrderedEnumerable<string> keys, int v)

@@ -1,4 +1,5 @@
 ﻿using Felix.Tools.Attributes;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace Felix.Tools.Tools
@@ -17,6 +18,28 @@ namespace Felix.Tools.Tools
 			var content = File.ReadAllText(path);
 			content = Regex.Replace(content, regexText, $@"user_pref(""network.proxy.type"", {(action == "On" ? 1 : 0)});");
 			File.WriteAllText(path, content);
+
+
+			var ps = Process.GetProcessesByName("firefox");
+			try
+			{
+				foreach (var p in ps)
+					if (p != null)
+						p.CloseMainWindow();
+			}
+			finally
+			{
+				foreach (var p in ps)
+					if (p != null)
+						p.Dispose();
+			}
+
+			using (var pf = new Process())
+			{
+				pf.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
+				pf.Start();
+			}
+
 			return Task.CompletedTask;
 		}
 	}
