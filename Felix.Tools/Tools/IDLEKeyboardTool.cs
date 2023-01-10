@@ -25,7 +25,7 @@ namespace Felix.Tools.Tools
 					}
 					if (wordCount > 0)
 					{
-						Thread.Sleep(TimeSpan.FromSeconds(10));
+						Thread.Sleep(TimeSpan.FromMinutes(1));
 					}
 					wordCount = AppContext.Random.Next(100);
 					for (int i = 0; i < wordCount && !p.HasExited; i++)
@@ -33,7 +33,6 @@ namespace Felix.Tools.Tools
 						SendKey(p, words[AppContext.Random.Next(words.Length)].ToString());
 						Thread.Sleep(0);
 					}
-					Thread.Sleep(TimeSpan.FromSeconds(10));
 				}
 			}
 			return Task.CompletedTask;
