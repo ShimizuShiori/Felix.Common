@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Felix.Tools.Tools.TestTools
 {
-	[Tool("ResourceStringAnalyzer", "Tests")]
+	[Tool("StringAnalyzer", "Tests")]
 	class GlowResourceStringAnalyzer : ITool
 	{
 		public Task StartAsync()
