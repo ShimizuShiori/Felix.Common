@@ -23,9 +23,12 @@ namespace Felix.Tools.Tools
 					{
 						SendKey(p, "{BACKSPACE}");
 					}
-					if (wordCount > 0)
+					for (int i = 0; wordCount > 0 && i < 60; i++)
 					{
-						Thread.Sleep(TimeSpan.FromMinutes(1));
+						if (p.HasExited)
+							break;
+
+						Thread.Sleep(TimeSpan.FromSeconds(1));
 					}
 					wordCount = AppContext.Random.Next(100);
 					for (int i = 0; i < wordCount && !p.HasExited; i++)
