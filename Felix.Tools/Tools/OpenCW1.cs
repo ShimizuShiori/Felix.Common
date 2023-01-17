@@ -10,7 +10,7 @@ namespace Felix.Tools.Tools
 		{
 			using (var p = new Process())
 			{
-				p.StartInfo.FileName = @"C:\BinRepo\CargoWise\Dev\CargoWiseOneAnyCpu.exe";
+				p.StartInfo.FileName = @"C:\git\wtg\CargoWise\Dev\Bin\CargoWiseOneAnyCpu.exe";
 				p.Start();
 			}
 			return Task.CompletedTask;

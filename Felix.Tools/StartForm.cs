@@ -9,7 +9,12 @@ namespace Felix.Tools
 		{
 			InitializeComponent();
 
+#if DEBUG
+			this.contextMenuStrip1.Items.Add("DEBUG MODE");
+			bool r = User32.RegisterHotKey(Handle, 1, KeyModifiers.Ctrl, Common.Keys.F2);
+#else
 			bool r = User32.RegisterHotKey(Handle, 1, KeyModifiers.Ctrl, Common.Keys.F1);
+#endif
 		}
 
 		protected override void OnClosing(CancelEventArgs e)
