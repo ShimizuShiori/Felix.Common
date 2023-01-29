@@ -17,36 +17,51 @@ namespace Felix.Tools.Tools
 				p.WaitForInputIdle();
 				User32.SetForegroundWindow(p.MainWindowHandle);
 				int wordCount = 0;
-				while (!p.HasExited)
+				try
 				{
-					for (int i = 0; i < wordCount; i++)
+					while (CanRun(p))
 					{
-						SendKey(p, "{BACKSPACE}");
-					}
-					for (int i = 0; wordCount > 0 && i < 60; i++)
-					{
-						if (p.HasExited)
-							break;
+						for (int i = 0; i < wordCount; i++)
+						{
+							if (!SendKey(p, "{BACKSPACE}"))
+								return Task.CompletedTask;
+						}
+						for (int i = 0; wordCount > 0 && i < 60; i++)
+						{
+							if (!CanRun(p))
+								break;
 
-						Thread.Sleep(TimeSpan.FromSeconds(1));
+							Thread.Sleep(TimeSpan.FromSeconds(1));
+						}
+						wordCount = AppContext.Random.Next(10, 20);
+						for (int i = 0; i < wordCount; i++)
+						{
+							if (!SendKey(p, words[AppContext.Random.Next(words.Length)].ToString()))
+								return Task.CompletedTask;
+						}
 					}
-					wordCount = AppContext.Random.Next(100);
-					for (int i = 0; i < wordCount && !p.HasExited; i++)
-					{
-						SendKey(p, words[AppContext.Random.Next(words.Length)].ToString());
-						Thread.Sleep(0);
-					}
+					return Task.CompletedTask;
+				}
+				finally
+				{
+					p.Kill();
+					p.Dispose();
 				}
 			}
-			return Task.CompletedTask;
 		}
 
-		void SendKey(Process p, string key)
+		bool SendKey(Process p, string key)
 		{
-			if (p.HasExited)
-				return;
+			if (!CanRun(p))
+				return false;
 
 			SendKeys.Send(key);
+			return true;
+		}
+
+		bool CanRun(Process p)
+		{
+			return p.MainWindowHandle == User32.GetForegroundWindow() && !p.HasExited;
 		}
 	}
 }
