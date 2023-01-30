@@ -130,6 +130,7 @@ namespace Felix.Tools
 			using (ChooesForm<T> form = new ChooesForm<T>(choices))
 			{
 				form.Text = title;
+				User32.SetActiveWindow(form.Handle);
 				form.ShowDialog();
 				if (string.IsNullOrEmpty(form.selectedKey))
 				{
