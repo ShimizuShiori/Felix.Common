@@ -20,5 +20,16 @@ namespace Felix.Common
 				.Groups[groupName]
 				.Value;
 		}
+
+		public static string AdjustToLeft(this string value, int toLength)
+		{
+			StringBuilder sb = new StringBuilder(toLength);
+			sb.Append(value);
+			for (int i = sb.Length; i < toLength; i++)
+			{
+				sb.Append(" ");
+			}
+			return sb.ToString();
+		}
 	}
 }

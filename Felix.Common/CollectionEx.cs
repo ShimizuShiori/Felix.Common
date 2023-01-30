@@ -1,4 +1,6 @@
-﻿namespace Felix.Common
+﻿using System.Text;
+
+namespace Felix.Common
 {
 	public static class CollectionEx
 	{
@@ -11,6 +13,18 @@
 				result[key] = value;
 			}
 			return result;
+		}
+
+		public static string JoinAsString(this IEnumerable<string> list, string joiner)
+		{
+			StringBuilder sb = new StringBuilder();
+			foreach (var item in list)
+			{
+				sb.Append(item);
+				sb.Append(joiner);
+			}
+			sb.Length = sb.Length - joiner.Length;
+			return sb.ToString();
 		}
 	}
 }
