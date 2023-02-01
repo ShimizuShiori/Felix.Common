@@ -20,10 +20,9 @@ namespace Felix.Tools
 			{
 				Application.Run(new StartForm());
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
-
-				throw;
+				OutputBox.Show(ex.ToString());
 			}
 			finally
 			{

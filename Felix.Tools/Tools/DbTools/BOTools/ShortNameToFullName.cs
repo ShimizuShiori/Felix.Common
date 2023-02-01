@@ -24,15 +24,22 @@ where c.name = @name and o.type = 'u'";
 				p.Value = $"{shortName}_PK";
 				cmd.Parameters.Add(p);
 				var tableName = "";
-				using (var reader = cmd.ExecuteReader())
+				try
 				{
-					while (reader.Read())
+					using (var reader = cmd.ExecuteReader())
 					{
-						tableName = reader.GetString(0);
-						if (tableName.Contains("_"))
-							continue;
-						sb.AppendLine(tableName);
+						while (reader.Read())
+						{
+							tableName = reader.GetString(0);
+							if (tableName.Contains("_"))
+								continue;
+							sb.AppendLine(tableName);
+						}
 					}
+				}
+				catch (Exception)
+				{
+					return Task.CompletedTask;
 				}
 			}
 			OutputBox.Show(sb.ToString());
