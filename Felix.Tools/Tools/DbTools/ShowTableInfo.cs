@@ -8,10 +8,10 @@ namespace Felix.Tools.Tools.DbTools
 	[TextTool("TableInfo", "DB", @"^\S*$")]
 	class ShowTableInfo : DbTool
 	{
+		protected override bool NeedToSelectADb => false;
 		protected override Task DoSomethingForDb(IDbConnection dbConnection)
 		{
 			string tableName = AppContext.SelectedText;
-
 
 			using (var cmd = dbConnection.CreateCommand())
 			{

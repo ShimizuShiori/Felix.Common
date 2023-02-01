@@ -18,7 +18,7 @@ namespace Felix.Tools
 			JobStarter.Start(cts.Token);
 			try
 			{
-				Application.Run(new TestForm());
+				Application.Run(new StartForm());
 			}
 			catch (Exception)
 			{
