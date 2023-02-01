@@ -60,7 +60,7 @@
 			this.ClientSize = new System.Drawing.Size(1968, 912);
 			this.Controls.Add(this.tabControl1);
 			this.Name = "TableInfoForm";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "TableInfoForm";
 			this.tabControl1.ResumeLayout(false);
 			this.ResumeLayout(false);
