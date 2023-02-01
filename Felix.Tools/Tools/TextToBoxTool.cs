@@ -20,10 +20,13 @@ namespace Felix.Tools.Tools
 			sb.Append("-".Repeat(maxWidth));
 			sb.AppendLine("-+");
 
-			// Space line
-			sb.Append("| ");
-			sb.Append(" ".Repeat(maxWidth));
-			sb.AppendLine(" |");
+			if (lines.Length > 1)
+			{
+				// Space line
+				sb.Append("| ");
+				sb.Append(" ".Repeat(maxWidth));
+				sb.AppendLine(" |");
+			}
 
 			// Content
 			foreach (var line in lines)
@@ -34,10 +37,13 @@ namespace Felix.Tools.Tools
 				sb.AppendLine(" |");
 			}
 
-			// Space line
-			sb.Append("| ");
-			sb.Append(" ".Repeat(maxWidth));
-			sb.AppendLine(" |");
+			if (lines.Length > 1)
+			{
+				// Space line
+				sb.Append("| ");
+				sb.Append(" ".Repeat(maxWidth));
+				sb.AppendLine(" |");
+			}
 
 			// Last Line
 			sb.Append("+-");
