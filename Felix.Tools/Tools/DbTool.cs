@@ -18,7 +18,7 @@ namespace Felix.Tools.Tools
 		{
 			var builder = new SqlConnectionStringBuilder();
 			builder.DataSource = ".";
-			builder.InitialCatalog = NeedToSelectADb
+			builder.InitialCatalog = DbNameList.Length > 1 && NeedToSelectADb
 				? ChooesForm<string>.Show(
 					"",
 					DbNameList.ToMap(x => (x, x)),
