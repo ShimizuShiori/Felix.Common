@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
 
 namespace Felix.Tools.Forms
 {
@@ -42,6 +34,9 @@ namespace Felix.Tools.Forms
 				var dataGridView = new DataGridView();
 				dataGridView.Dock = DockStyle.Fill;
 				dataGridView.DataSource = set.Tables[i];
+				dataGridView.AllowUserToAddRows = false;
+				dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+				dataGridView.ReadOnly = true;
 
 				tabControl1.TabPages.Add(page);
 				page.Controls.Add(dataGridView);
