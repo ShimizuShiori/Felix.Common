@@ -1,8 +1,9 @@
-﻿using System.Diagnostics;
+﻿using Felix.Tools.Attributes;
+using System.Diagnostics;
 
 namespace Felix.Tools.ToolForms
 {
-	[Tool("Unlocker", "FS")]
+	[FileTool("Unlocker", "FS")]
 	public class UnLockerForm : Form
 	{
 		public UnLockerForm()
@@ -12,16 +13,19 @@ namespace Felix.Tools.ToolForms
 
 		private void UnLockerForm_Shown(object? sender, EventArgs e)
 		{
-			ProcessStartInfo psi = new ProcessStartInfo();
-			psi.FileName = @"C:\Program Files (x86)\IObit\IObit Unlocker\IObitUnlocker.exe";
-			psi.Arguments = $"/None {AppContext.SelectedText}";
-			psi.Verb = "runas";
-			using (var p = new Process())
+			foreach(var path in AppContext.SelectedFilePathList)
 			{
-				p.StartInfo = psi;
-				p.Start();
+				ProcessStartInfo psi = new ProcessStartInfo();
+				psi.FileName = @"C:\Program Files (x86)\IObit\IObit Unlocker\IObitUnlocker.exe";
+				psi.Arguments = $"/None {path}";
+				psi.Verb = "runas";
+				using (var p = new Process())
+				{
+					p.StartInfo = psi;
+					p.Start();
+				}
+				this.Close();
 			}
-			this.Close();
 		}
 	}
 }

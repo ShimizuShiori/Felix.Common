@@ -26,7 +26,7 @@ namespace Felix.Tools
 				return;
 			if (ins is ITool ts)
 			{
-				ts.Start();
+				await ts.StartAsync();
 			}
 			else return;
 			this.Close();

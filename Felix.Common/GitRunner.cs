@@ -40,6 +40,11 @@ namespace Felix.Common
 			runner.Run($"checkout {branch}");
 		}
 
+		public static void CreateBranch(this GitRunner runner, string branch)
+		{
+			runner.Run($"branch {branch}");
+		}
+
 		public static void CreateWorktreeForCurrentBranch(this GitRunner runner, Func<string, string> path)
 		{
 			var branch = runner.GetCurrentBranch();

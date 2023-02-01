@@ -6,8 +6,9 @@
 		{
 
 		}
-		public void Start()
+		public Task StartAsync()
 		{
+			return Task.CompletedTask;
 		}
 
 		static readonly ITool nullTool = new NullTool();

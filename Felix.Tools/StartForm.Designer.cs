@@ -1,6 +1,6 @@
 ﻿namespace Felix.Tools
 {
-	partial class Form1
+	partial class StartForm
 	{
 		/// <summary>
 		///  Required designer variable.
@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartForm));
 			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -58,22 +58,22 @@
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(143, 52);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(361, 107);
 			// 
 			// exitToolStripMenuItem
 			// 
 			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(142, 48);
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(360, 48);
 			this.exitToolStripMenuItem.Text = "Exit";
 			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
-			// Form1
+			// StartForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(802, 829);
 			this.Controls.Add(this.flowLayoutPanel1);
-			this.Name = "Form1";
+			this.Name = "StartForm";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "StartForm";

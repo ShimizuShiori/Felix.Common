@@ -1,4 +1,6 @@
-﻿namespace Felix.Tools.ToolForms
+﻿using Felix.Tools.Attributes;
+
+namespace Felix.Tools.ToolForms
 {
 	[Tool("Xml Converter", "Xml")]
 	public partial class XmlConvertForm : Form

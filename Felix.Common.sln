@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoveMouse", "MoveMouse\Move
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{D366D28C-23D7-4345-8CE4-B9621B6EDB63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Felix.Tools", "Felix.Tools\Felix.Tools.csproj", "{68DEC349-566D-4E76-A87B-92264B91CB92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Felix.Tools", "Felix.Tools\Felix.Tools.csproj", "{68DEC349-566D-4E76-A87B-92264B91CB92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

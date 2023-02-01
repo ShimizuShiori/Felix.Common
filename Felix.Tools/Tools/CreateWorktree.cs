@@ -1,11 +1,12 @@
 ﻿using Felix.Common;
+using Felix.Tools.Attributes;
 
 namespace Felix.Tools.Tools
 {
 	[Tool("NewWorktree", "Repo")]
-	class CreateWorktree : ITool
+	class CreateWorktree : SyncTool
 	{
-		public void Start()
+		protected override void Start()
 		{
 			string folderName = Path.GetDirectoryName(AppContext.SelectedText) ?? string.Empty;
 			if (string.IsNullOrEmpty(folderName))

@@ -1,12 +1,13 @@
 ﻿using Felix.Common;
+using Felix.Tools.Attributes;
 
 namespace Felix.Tools.Tools
 {
-	[Tool("SO", "Search")]
-	class SearchOnSO : ITool
+	[TextTool("SO", "Search")]
+	class SearchOnSO : SyncTool
 	{
 		const string urlFormat = @"https://stackoverflow.com/c/wisetechglobal/search?q={0}&searchOn=1";
-		public void Start()
+		protected override void Start()
 		{
 			var content = AppContext.SelectedText
 				.Replace(" ", "+");

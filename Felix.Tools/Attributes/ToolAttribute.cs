@@ -1,4 +1,4 @@
-﻿namespace Felix.Tools
+﻿namespace Felix.Tools.Attributes
 {
 	[AttributeUsage(AttributeTargets.Class)]
 	public class ToolAttribute : Attribute
@@ -19,6 +19,11 @@
 		public static bool IsEmpty(ToolAttribute toolAttribute)
 		{
 			return toolAttribute == empty;
+		}
+
+		public virtual bool Show()
+		{
+			return true;
 		}
 	}
 }

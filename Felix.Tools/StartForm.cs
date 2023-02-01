@@ -3,13 +3,18 @@ using System.ComponentModel;
 
 namespace Felix.Tools
 {
-	public partial class Form1 : Form
+	public partial class StartForm : Form
 	{
-		public Form1()
+		public StartForm()
 		{
 			InitializeComponent();
 
+#if DEBUG
+			this.contextMenuStrip1.Items.Add("DEBUG MODE");
+			bool r = User32.RegisterHotKey(Handle, 1, KeyModifiers.Ctrl, Common.Keys.F2);
+#else
 			bool r = User32.RegisterHotKey(Handle, 1, KeyModifiers.Ctrl, Common.Keys.F1);
+#endif
 		}
 
 		protected override void OnClosing(CancelEventArgs e)
@@ -27,14 +32,8 @@ namespace Felix.Tools
 					{
 						case 1:
 							SendKeys.SendWait("^c");
-							if (Clipboard.ContainsText())
-							{
-								StartWorkWithSelectedText(Clipboard.GetText());
-							}
-							else if (Clipboard.GetFileDropList().Count > 0)
-							{
-								StartWorkWithSelectedText(Clipboard.GetFileDropList()[0]);
-							}
+							AppContext.CopiedInfo = CopiedInfoFactory.Create();
+							StartWorkWithSelectedCopiedInfo();
 							break;
 						default:
 							break;
@@ -46,9 +45,8 @@ namespace Felix.Tools
 			base.WndProc(ref m);
 		}
 
-		private void StartWorkWithSelectedText(string selectedText)
+		private void StartWorkWithSelectedCopiedInfo()
 		{
-			AppContext.SelectedText = selectedText.Trim();
 			using (var form = new CategoryForm())
 			{
 				form.ShowDialog();
