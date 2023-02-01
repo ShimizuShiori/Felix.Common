@@ -20,8 +20,15 @@ namespace Felix.Tools.Tools.DbTools
 				adapter.SelectCommand = (SqlCommand)cmd;
 				using (var set = new DataSet())
 				{
-					adapter.Fill(set);
-					TableInfoForm.Show(set);
+					try
+					{
+						adapter.Fill(set);
+						TableInfoForm.Show(set);
+					}
+					catch (Exception)
+					{
+						return Task.CompletedTask;
+					}
 				}
 			}
 
