@@ -6,7 +6,7 @@ namespace Felix.Tools.Tools.TestTools
 	[Tool("StringAnalyzer", "Tests")]
 	class GlowResourceStringAnalyzer : ITool
 	{
-		public Task StartAsync()
+		public void Start()
 		{
 			using (var p = new Process())
 			{
@@ -22,7 +22,6 @@ namespace Felix.Tools.Tools.TestTools
 				p.StartInfo.UseShellExecute = true;
 				p.Start();
 			}
-			return Task.CompletedTask;
 		}
 	}
 }

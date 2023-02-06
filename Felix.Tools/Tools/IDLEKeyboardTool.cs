@@ -8,8 +8,9 @@ namespace Felix.Tools.Tools
 	class IDLEKeyboardTool : ITool
 	{
 		const string words = "QWERTYUIOPLKJHGFDSAZXCVBNM";
-		public Task StartAsync()
+		public void Start()
 		{
+			// todo: use thread
 			using (var p = new Process())
 			{
 				p.StartInfo.FileName = "notepad";
@@ -24,7 +25,7 @@ namespace Felix.Tools.Tools
 						for (int i = 0; i < wordCount; i++)
 						{
 							if (!SendKey(p, "{BACKSPACE}"))
-								return Task.CompletedTask;
+								return;
 						}
 						for (int i = 0; wordCount > 0 && i < 60; i++)
 						{
@@ -37,10 +38,10 @@ namespace Felix.Tools.Tools
 						for (int i = 0; i < wordCount; i++)
 						{
 							if (!SendKey(p, words[AppContext.Random.Next(words.Length)].ToString()))
-								return Task.CompletedTask;
+								return;
 						}
 					}
-					return Task.CompletedTask;
+					return;
 				}
 				finally
 				{

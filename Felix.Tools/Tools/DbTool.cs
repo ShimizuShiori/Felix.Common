@@ -14,7 +14,7 @@ namespace Felix.Tools.Tools
 			DbNameOdyssey
 		};
 
-		public async Task StartAsync()
+		public void Start()
 		{
 			var builder = new SqlConnectionStringBuilder();
 			builder.DataSource = ".";
@@ -30,10 +30,10 @@ namespace Felix.Tools.Tools
 			using (var conn = new SqlConnection(builder.ConnectionString))
 			{
 				conn.Open();
-				await DoSomethingForDb(conn);
+				DoSomethingForDb(conn);
 			}
 		}
 
-		protected abstract Task DoSomethingForDb(IDbConnection dbConnection);
+		protected abstract void DoSomethingForDb(IDbConnection dbConnection);
 	}
 }

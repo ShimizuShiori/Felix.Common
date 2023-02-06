@@ -2,7 +2,7 @@
 
 namespace Felix.Tools.ToolForms
 {
-	class FormTool : SyncTool
+	class FormTool : ITool
 	{
 		readonly Form form;
 
@@ -11,7 +11,7 @@ namespace Felix.Tools.ToolForms
 			this.form = form;
 		}
 
-		protected override void Start()
+		public void Start()
 		{
 			form.ShowDialog();
 		}

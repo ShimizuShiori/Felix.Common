@@ -6,8 +6,9 @@ namespace Felix.Tools.Tools
 	[TextTool("Everything", "Search")]
 	class SearchInEverything : ITool
 	{
-		public async Task StartAsync()
+		public void Start()
 		{
+			// todo: use thread
 			ProcessStartInfo psi = new ProcessStartInfo();
 			psi.FileName = @"C:\Program Files\Everything\Everything.exe";
 			psi.Arguments = $"-s {AppContext.SelectedText}";
@@ -15,7 +16,7 @@ namespace Felix.Tools.Tools
 			{
 				p.StartInfo = psi;
 				p.Start();
-				await Task.Delay(TimeSpan.FromMinutes(1));
+				Thread.Sleep(TimeSpan.FromMinutes(1));
 				using (var p2 = new Process())
 				{
 					p2.StartInfo.FileName = @"C:\Program Files\Everything\Everything.exe";

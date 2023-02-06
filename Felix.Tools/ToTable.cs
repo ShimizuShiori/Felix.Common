@@ -8,15 +8,15 @@ namespace Felix.Tools
 	[TextTool("Table", "To")]
 	class ToTable : ITool
 	{
-		public Task StartAsync()
+		public void Start()
 		{
 			string[] lines = AppContext.SelectedText.Split(Environment.NewLine);
 			if (lines.Length == 0)
-				return Task.CompletedTask;
+				return;
 
 			var spliter = FindSpliter(lines);
 			if (spliter == '0')
-				return Task.CompletedTask;
+				return;
 			IEnumerable<string[]> splittedLines = lines.Select(x => x.Split(spliter));
 			int columnSize = splittedLines.First().Length;
 			int[] maxWidthForEachColumn = GetMaxWidthForEachColumn(splittedLines, columnSize);
@@ -24,7 +24,7 @@ namespace Felix.Tools
 			var tableText = BuildTableText(splittedLines, columnSize, maxWidthForEachColumn);
 
 			OutputBox.Show(tableText);
-			return Task.CompletedTask;
+			return;
 		}
 
 		private string BuildTableText(IEnumerable<string[]> splittedLines, int columnSize, int[] maxWidthForEachColumn)
