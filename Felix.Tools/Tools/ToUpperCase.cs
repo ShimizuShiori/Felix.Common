@@ -5,10 +5,10 @@ namespace Felix.Tools.Tools
 	[TextTool("Upper", "To")]
 	class ToUpperCase : ITool
 	{
-		public Task StartAsync()
+		public void Start()
 		{
 			OutputBox.Show(AppContext.SelectedText.ToUpper());
-			return Task.CompletedTask;
+			return;
 		}
 	}
 }

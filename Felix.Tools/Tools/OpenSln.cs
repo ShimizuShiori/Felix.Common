@@ -7,18 +7,18 @@ namespace Felix.Tools.Tools
 	[FileTool("Sln", "Open")]
 	class OpenSln : ITool
 	{
-		public async Task StartAsync()
+		public void Start()
 		{
 			foreach (var path in AppContext.SelectedFilePathList)
-				await OpenSlnByPath(path);
+				OpenSlnByPath(path);
 		}
 
-		private Task OpenSlnByPath(string path)
+		void OpenSlnByPath(string path)
 		{
 			var file = new FileInfo(path);
 			var dir = file.Directory;
 			if (dir == null)
-				return Task.CompletedTask;
+				return;
 
 			FileInfo[] slns;
 			while ((slns = dir.GetFiles("*.sln")).Length == 0)
@@ -38,11 +38,11 @@ namespace Felix.Tools.Tools
 					slns.ToMap(f => (f.Name, f)),
 					new FileInfo("c:\\NOT EXIST.txt"));
 				if (selectedSln.Name == "NOT EXIST.txt")
-					return Task.CompletedTask;
+					return;
 
 				OpenDevenv(selectedSln.FullName);
 			}
-			return Task.CompletedTask;
+			return;
 		}
 
 		void OpenDevenv(string path)

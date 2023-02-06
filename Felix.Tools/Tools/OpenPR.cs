@@ -5,10 +5,10 @@ using Felix.Tools.SharedInfos;
 namespace Felix.Tools.Tools
 {
 	[Tool("PR", "Repo")]
-	class OpenPR : SyncTool
+	class OpenPR : ITool
 	{
 		const string urlFormat = @"https://devops.wisetechglobal.com/wtg/{0}/_git/{1}/pullrequests";
-		protected override void Start()
+		public void Start()
 		{
 			var selected = ChooesForm<(string, string[])>.Show(
 				TFSInfos.GetProjects());

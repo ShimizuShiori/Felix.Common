@@ -4,9 +4,9 @@ using Felix.Tools.Attributes;
 namespace Felix.Tools.Tools
 {
 	[Tool("NewWorktree", "Repo")]
-	class CreateWorktree : SyncTool
+	class CreateWorktree : ITool
 	{
-		protected override void Start()
+		public void Start()
 		{
 			string folderName = Path.GetDirectoryName(AppContext.SelectedText) ?? string.Empty;
 			if (string.IsNullOrEmpty(folderName))

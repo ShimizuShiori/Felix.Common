@@ -7,17 +7,17 @@ namespace Felix.Tools.Tools
 	[Tool("Local", "Repo")]
 	class OpenLocalRepo : ITool
 	{
-		public Task StartAsync()
+		public void Start()
 		{
 			var selected = ChooesForm<(string, string[])>.Show(
 				TFSInfos.GetProjects());
 
 			if (selected == "")
-				return Task.CompletedTask;
+				return;
 
 			var selected2 = ChooesForm<string>.Show(TFSInfos.GetRepos(selected));
 			if (selected2 == "")
-				return Task.CompletedTask;
+				return;
 
 			using (var p = new Process())
 			{
@@ -25,7 +25,7 @@ namespace Felix.Tools.Tools
 				p.StartInfo.UseShellExecute = true;
 				p.Start();
 			}
-			return Task.CompletedTask;
+			return;
 		}
 	}
 }

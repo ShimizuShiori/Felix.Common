@@ -6,9 +6,9 @@ namespace Felix.Tools.Tools
 	[Tool("Close", "Local CW1")]
 	class CloseCW1 : ITool
 	{
-		public Task StartAsync()
+		public void Start()
 		{
-			return Task.Run(() =>
+			ThreadPool.QueueUserWorkItem(state =>
 			{
 				while (true)
 				{

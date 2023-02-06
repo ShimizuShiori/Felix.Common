@@ -6,7 +6,7 @@ namespace Felix.Tools.Tools
 	[TextTool("Being", "Search")]
 	class SearchInBeing : ITool
 	{
-		public Task StartAsync()
+		public void Start()
 		{
 			var lang = new (string, string)[]
 			{
@@ -15,10 +15,10 @@ namespace Felix.Tools.Tools
 			};
 			var selectedLang = ChooesForm<(string, string)>.Show("", lang.ToMap(x => (x.Item1, x)), ("", ""));
 			if (selectedLang.Item1 == "")
-				return Task.CompletedTask;
+				return;
 
 			UrlHelper.Open($"https://cn.bing.com/search?q={UrlHelper.Encode(AppContext.SelectedText)}&ensearch={selectedLang.Item2}");
-			return Task.CompletedTask;
+			return;
 		}
 	}
 }

@@ -9,7 +9,7 @@ namespace Felix.Tools.Tools.DbTools
 	class ShowTableInfo : DbTool
 	{
 		protected override bool NeedToSelectADb => false;
-		protected override Task DoSomethingForDb(IDbConnection dbConnection)
+		protected override void DoSomethingForDb(IDbConnection dbConnection)
 		{
 			string tableName = AppContext.SelectedText;
 
@@ -27,12 +27,12 @@ namespace Felix.Tools.Tools.DbTools
 					}
 					catch (Exception)
 					{
-						return Task.CompletedTask;
+						return;
 					}
 				}
 			}
 
-			return Task.CompletedTask;
+			return;
 		}
 	}
 }

@@ -8,46 +8,48 @@ namespace Felix.Tools.Tools
 	class IDLEKeyboardTool : ITool
 	{
 		const string words = "QWERTYUIOPLKJHGFDSAZXCVBNM";
-		public Task StartAsync()
+		public void Start()
 		{
-			using (var p = new Process())
+			ThreadPool.QueueUserWorkItem(state => 
 			{
-				p.StartInfo.FileName = "notepad";
-				p.Start();
-				p.WaitForInputIdle();
-				User32.SetForegroundWindow(p.MainWindowHandle);
-				int wordCount = 0;
-				try
+				using (var p = new Process())
 				{
-					while (CanRun(p))
+					p.StartInfo.FileName = "notepad";
+					p.Start();
+					p.WaitForInputIdle();
+					User32.SetForegroundWindow(p.MainWindowHandle);
+					int wordCount = 0;
+					try
 					{
-						for (int i = 0; i < wordCount; i++)
+						while (CanRun(p))
 						{
-							if (!SendKey(p, "{BACKSPACE}"))
-								return Task.CompletedTask;
-						}
-						for (int i = 0; wordCount > 0 && i < 60; i++)
-						{
-							if (!CanRun(p))
-								break;
+							for (int i = 0; i < wordCount; i++)
+							{
+								if (!SendKey(p, "{BACKSPACE}"))
+									return;
+							}
+							for (int i = 0; wordCount > 0 && i < 60; i++)
+							{
+								if (!CanRun(p))
+									break;
 
-							Thread.Sleep(TimeSpan.FromSeconds(1));
-						}
-						wordCount = AppContext.Random.Next(10, 20);
-						for (int i = 0; i < wordCount; i++)
-						{
-							if (!SendKey(p, words[AppContext.Random.Next(words.Length)].ToString()))
-								return Task.CompletedTask;
+								Thread.Sleep(TimeSpan.FromSeconds(1));
+							}
+							wordCount = AppContext.Random.Next(10, 20);
+							for (int i = 0; i < wordCount; i++)
+							{
+								if (!SendKey(p, words[AppContext.Random.Next(words.Length)].ToString()))
+									return;
+							}
 						}
 					}
-					return Task.CompletedTask;
+					finally
+					{
+						p.Kill();
+						p.Dispose();
+					}
 				}
-				finally
-				{
-					p.Kill();
-					p.Dispose();
-				}
-			}
+			});
 		}
 
 		bool SendKey(Process p, string key)

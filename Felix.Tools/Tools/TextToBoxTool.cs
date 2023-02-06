@@ -7,7 +7,7 @@ namespace Felix.Tools.Tools
 	[TextTool("Box", "To")]
 	class TextToBoxTool : ITool
 	{
-		public Task StartAsync()
+		public void Start()
 		{
 			string text = AppContext.SelectedText.Replace("\t", "    ");
 			string[] lines = text.Split(Environment.NewLine);
@@ -51,7 +51,7 @@ namespace Felix.Tools.Tools
 			sb.AppendLine("-+");
 
 			OutputBox.Show(sb.ToString());
-			return Task.CompletedTask;
+			return;
 		}
 
 		private int GetMaxWidth(string[] lines)

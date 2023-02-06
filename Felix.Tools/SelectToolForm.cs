@@ -11,7 +11,7 @@ namespace Felix.Tools
 			this.Shown += SelectToolForm_Shown;
 		}
 
-		private async void SelectToolForm_Shown(object? sender, EventArgs e)
+		private void SelectToolForm_Shown(object? sender, EventArgs e)
 		{
 			this.Hide();
 			var infos = AppContext.ToolFactory.GetToolInfosByCategory(AppContext.SelectedCategory);
@@ -26,7 +26,7 @@ namespace Felix.Tools
 				return;
 			if (ins is ITool ts)
 			{
-				await ts.StartAsync();
+				ts.Start();
 			}
 			else return;
 			this.Close();

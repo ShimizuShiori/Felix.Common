@@ -2,6 +2,6 @@
 {
 	interface ITool
 	{
-		Task StartAsync();
+		void Start();
 	}
 }

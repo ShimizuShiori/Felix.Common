@@ -5,9 +5,9 @@ using Felix.Tools.SharedInfos;
 namespace Felix.Tools.Tools
 {
 	[TextTool("TFS", "Search")]
-	class SearchInTFS : SyncTool
+	class SearchInTFS : ITool
 	{
-		protected override void Start()
+		public void Start()
 		{
 			var mode = new (string, string)[]
 			{
