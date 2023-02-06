@@ -56,6 +56,10 @@ namespace Felix.Tools
 
 		private static void Timer_Tick(object? sender, EventArgs e)
 		{
+			if (sender == null)
+				return;
+			System.Windows.Forms.Timer timer = (System.Windows.Forms.Timer)sender;
+			timer.Enabled = false;
 			Queue<object> queue = new Queue<object>();
 
 			lock (uiQueueLock)
@@ -68,6 +72,7 @@ namespace Felix.Tools
 				foreach (var listener in listeners)
 					listener.OnMessage(message);
 			}
+			timer.Enabled = true;
 		}
 
 		public static void PublishUiMessage(object message)

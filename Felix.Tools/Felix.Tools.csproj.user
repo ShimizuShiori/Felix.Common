@@ -10,6 +10,9 @@
     <Compile Update="ChooesForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\LoggerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\TableInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>

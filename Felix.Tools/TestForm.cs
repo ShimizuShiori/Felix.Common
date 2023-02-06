@@ -1,4 +1,5 @@
 ﻿using Felix.Tools.Forms;
+using Felix.Tools.Messages;
 
 namespace Felix.Tools
 {
@@ -13,10 +14,11 @@ namespace Felix.Tools
 			this.Disposed += TestForm_Disposed;
 			ThreadPool.QueueUserWorkItem(state =>
 			{
+				int i = 0;
 				while (true)
 				{
 					Thread.Sleep(1000);
-					AppContext.PublishUiMessage("abc");
+					AppContext.PublishUiMessage(new LogMessage(this, i++.ToString()));
 				}
 			});
 		}
@@ -33,7 +35,7 @@ namespace Felix.Tools
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			TestForm testForm = new TestForm();
+			var testForm = new LoggerForm();
 			testForm.Show();
 		}
 	}
