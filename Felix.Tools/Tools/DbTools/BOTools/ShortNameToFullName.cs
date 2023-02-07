@@ -9,7 +9,7 @@ namespace Felix.Tools.Tools.DbTools.BOTools
 	{
 		protected override bool NeedToSelectADb => false;
 
-		protected override Task DoSomethingForDb(IDbConnection dbConnection)
+		protected override void DoSomethingForDb(IDbConnection dbConnection)
 		{
 			var shortName = AppContext.SelectedText;
 			var sqlCommand = @"select o.name from syscolumns c
@@ -39,11 +39,11 @@ where c.name = @name and o.type = 'u'";
 				}
 				catch (Exception)
 				{
-					return Task.CompletedTask;
+					return;
 				}
 			}
 			OutputBox.Show(sb.ToString());
-			return Task.CompletedTask;
+			return;
 		}
 	}
 }

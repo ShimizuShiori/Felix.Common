@@ -9,11 +9,11 @@ namespace Felix.Tools.Tools
 	{
 		const string path = @"C:\Users\Felix.Fei\AppData\Roaming\Mozilla\Firefox\Profiles\v75srzxh.default-release\prefs.js";
 		const string regexText = @"user_pref\(""network\.proxy\.type"", \d\);";
-		public Task StartAsync()
+		public void Start()
 		{
 			var action = ChooesForm<string>.Show("On", "Off");
 			if (string.IsNullOrEmpty(action))
-				return Task.CompletedTask;
+				return;
 
 			var content = File.ReadAllText(path);
 			content = Regex.Replace(content, regexText, $@"user_pref(""network.proxy.type"", {(action == "On" ? 1 : 0)});");
@@ -39,8 +39,6 @@ namespace Felix.Tools.Tools
 				pf.StartInfo.FileName = @"C:\Program Files\Mozilla Firefox\firefox.exe";
 				pf.Start();
 			}
-
-			return Task.CompletedTask;
 		}
 	}
 }

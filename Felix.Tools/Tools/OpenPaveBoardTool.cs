@@ -13,17 +13,17 @@ namespace Felix.Tools.Tools
 			boardNameToGuidMap["GLOW"] = "f07ab6cf-183d-43ac-984d-7b9b1f47cb47";
 		}
 
-		public Task StartAsync()
+		public void Start()
 		{
 			var selectedBoardName = boardNameToGuidMap.Count == 1
 				? boardNameToGuidMap.Keys.First()
 				: ChooesForm<string>.Show(boardNameToGuidMap.Keys);
 			if (selectedBoardName == "")
-				return Task.CompletedTask;
+				return;
 
 			var mode = ChooesForm<string>.Show("Browser", "Window");
-			if (mode == String.Empty)
-				return Task.CompletedTask;
+			if (mode == string.Empty)
+				return;
 
 			if (mode == "Browser")
 			{
@@ -33,7 +33,7 @@ namespace Felix.Tools.Tools
 			{
 				UrlHelper.Open($"https://svc-ediprod.wtg.zone/Services/link/ShowEditForm/VisualBoard/{boardNameToGuidMap[selectedBoardName]}?lang=en-gb");
 			}
-			return Task.CompletedTask;
+			return;
 		}
 	}
 }

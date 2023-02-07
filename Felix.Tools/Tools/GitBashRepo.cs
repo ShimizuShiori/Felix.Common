@@ -4,8 +4,8 @@ using System.Diagnostics;
 
 namespace Felix.Tools.Tools
 {
-	[Tool("Local", "Repo")]
-	class OpenLocalRepo : ITool
+	[Tool("GitBash", "Repo")]
+	class GitBashRepo : ITool
 	{
 		public void Start()
 		{
@@ -21,8 +21,9 @@ namespace Felix.Tools.Tools
 
 			using (var p = new Process())
 			{
-				p.StartInfo.FileName = @$"C:\git\wtg\{selected}\{selected2}";
-				p.StartInfo.UseShellExecute = true;
+				p.StartInfo.FileName = @"C:\Program Files\Git\git-bash.exe"; 
+				p.StartInfo.Arguments = @$"--cd=C:\git\wtg\{selected}\{selected2}";
+				p.StartInfo.UseShellExecute = false;
 				p.Start();
 			}
 		}

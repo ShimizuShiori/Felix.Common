@@ -4,10 +4,10 @@ using Felix.Tools.Attributes;
 namespace Felix.Tools.Tools
 {
 	[TextTool("SO", "Search")]
-	class SearchOnSO : SyncTool
+	class SearchOnSO : ITool
 	{
 		const string urlFormat = @"https://stackoverflow.com/c/wisetechglobal/search?q={0}&searchOn=1";
-		protected override void Start()
+		public void Start()
 		{
 			var content = AppContext.SelectedText
 				.Replace(" ", "+");

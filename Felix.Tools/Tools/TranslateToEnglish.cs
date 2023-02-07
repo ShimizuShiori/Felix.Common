@@ -4,10 +4,10 @@ using Felix.Tools.Attributes;
 namespace Felix.Tools.Tools
 {
 	[Tool("En", "Translate")]
-	class TranslateToEnglish : SyncTool
+	class TranslateToEnglish : ITool
 	{
 		const string urlFormat = "https://fanyi.baidu.com/?aldtype=16047#zh/en/{0}";
-		protected override void Start()
+		public void Start()
 		{
 			UrlHelper.Open(string.Format(urlFormat, AppContext.SelectedText));
 		}
