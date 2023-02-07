@@ -158,6 +158,26 @@ namespace Felix.Tools
 			RunCommand(@$"commit -m ""{comment}""");
 		}
 
+		private void mergeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string fromBranch = InputBox.Show("From Branch Name");
+			if (string.IsNullOrEmpty(fromBranch))
+				return;
+			string opt = ChooesForm<string>.Show("", "--no-ff", "--squash");
+			if (string.IsNullOrEmpty(opt))
+				return;
+
+			RunCommand($"merge {opt} {fromBranch}");
+		}
+
+		private void raseToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string fromBranch = InputBox.Show("From Branch Name");
+			if (string.IsNullOrEmpty(fromBranch))
+				return;
+			RunCommand($"rebase {fromBranch}");
+		}
+
 		#region Inner Classes
 
 		record GitOutputMessage(string Message);
