@@ -7,6 +7,7 @@ namespace Felix.Tools
 	{
 		readonly IDisposable listener;
 		readonly string gitRepoPath;
+		readonly Guid id = Guid.NewGuid();
 
 		public GitHelperForm(string gitRootPath = "")
 		{
@@ -24,18 +25,18 @@ namespace Felix.Tools
 
 		public void OnMessage(object message)
 		{
-			if (message is GitOutputMessage gom)
+			if (message is GitOutputMessage gom && gom.FormId == id)
 			{
 				this.textBox1.AppendText(gom.Message);
 				this.textBox1.AppendText(Environment.NewLine);
 			}
-			else if (message is GitInputMessage gim)
+			else if (message is GitInputMessage gim && gim.FormId == id)
 			{
 				this.textBox1.AppendText(">> git ");
 				this.textBox1.AppendText(gim.Command);
 				this.textBox1.AppendText(Environment.NewLine);
 			}
-			else if (message is GitErrorStartMessage)
+			else if (message is GitErrorStartMessage gsm && gsm.FormId == id)
 			{
 				this.textBox1.AppendText("======= ERROR ======= ");
 				this.textBox1.AppendText(Environment.NewLine);
@@ -51,7 +52,7 @@ namespace Felix.Tools
 		{
 			ThreadPool.QueueUserWorkItem(state =>
 			{
-				AppContext.PublishUiMessage(new GitInputMessage(command));
+				AppContext.PublishUiMessage(new GitInputMessage(id, command));
 				using (var p = new Process())
 				{
 					p.StartInfo.FileName = "git.exe";
@@ -75,12 +76,12 @@ namespace Felix.Tools
 								if (err == null)
 									break;
 								if (i++ == 0)
-									AppContext.PublishUiMessage(new GitErrorStartMessage());
-								AppContext.PublishUiMessage(new GitInputMessage(err));
+									AppContext.PublishUiMessage(new GitErrorStartMessage(id));
+								AppContext.PublishUiMessage(new GitInputMessage(id, err));
 							}
 							break;
 						}
-						AppContext.PublishUiMessage(new GitOutputMessage(str));
+						AppContext.PublishUiMessage(new GitOutputMessage(id, str));
 					}
 				}
 			});
@@ -180,11 +181,11 @@ namespace Felix.Tools
 
 		#region Inner Classes
 
-		record GitOutputMessage(string Message);
+		record GitOutputMessage(Guid FormId, string Message);
 
-		record GitInputMessage(string Command);
+		record GitInputMessage(Guid FormId, string Command);
 
-		record GitErrorStartMessage();
+		record GitErrorStartMessage(Guid FormId);
 
 		#endregion
 	}
