@@ -179,6 +179,21 @@ namespace Felix.Tools
 			RunCommand($"rebase {fromBranch}");
 		}
 
+		private void cleanToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			RunCommand("clean -xfd");
+		}
+
+		private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			RunCommand("git restore --staged .");
+		}
+
+		private void revertToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			RunCommand("checkout .");
+		}
+
 		#region Inner Classes
 
 		record GitOutputMessage(Guid FormId, string Message);
