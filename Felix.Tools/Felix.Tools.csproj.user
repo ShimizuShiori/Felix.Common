@@ -25,9 +25,6 @@
     <Compile Update="SelectToolForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="TestForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="ToolForms\FindClassInTFSForm.cs">
       <SubType>Form</SubType>
     </Compile>

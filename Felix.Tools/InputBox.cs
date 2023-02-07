@@ -15,10 +15,12 @@
 
 		}
 
-		public InputBox(string title)
+		public InputBox(string title, string defaultValue = "")
 		{
-			this.Text = title;
 			InitializeComponent();
+			this.Text = title;
+			this.value = defaultValue;
+			this.textBox1.Text = value;
 		}
 
 		private void InitializeComponent()
@@ -50,9 +52,9 @@
 			// 
 			// textBox1
 			// 
-			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			| System.Windows.Forms.AnchorStyles.Left)
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.textBox1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.textBox1.Location = new System.Drawing.Point(3, 3);
 			this.textBox1.Multiline = true;
@@ -79,7 +81,7 @@
 			this.button1.Location = new System.Drawing.Point(1111, 3);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(188, 58);
-			this.button1.TabIndex = 0;
+			this.button1.TabIndex = 3;
 			this.button1.Text = "Cancel";
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -89,7 +91,7 @@
 			this.button2.Location = new System.Drawing.Point(917, 3);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(188, 58);
-			this.button2.TabIndex = 1;
+			this.button2.TabIndex = 2;
 			this.button2.Text = "Reset";
 			this.button2.UseVisualStyleBackColor = true;
 			this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -99,7 +101,7 @@
 			this.button3.Location = new System.Drawing.Point(723, 3);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(188, 58);
-			this.button3.TabIndex = 2;
+			this.button3.TabIndex = 1;
 			this.button3.Text = "OK";
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -134,9 +136,9 @@
 			this.Close();
 		}
 
-		public static string Show(string title)
+		public static string Show(string title, string defaultValue = "")
 		{
-			using (var form = new InputBox(title))
+			using (var form = new InputBox(title, defaultValue))
 			{
 				form.ShowDialog();
 				return form.value;
