@@ -35,7 +35,7 @@ namespace Felix.Tools
 				this.textBox1.AppendText(gim.Command);
 				this.textBox1.AppendText(Environment.NewLine);
 			}
-			else if(message is GitErrorStartMessage)
+			else if (message is GitErrorStartMessage)
 			{
 				this.textBox1.AppendText("======= ERROR ======= ");
 				this.textBox1.AppendText(Environment.NewLine);
@@ -103,13 +103,12 @@ namespace Felix.Tools
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			string newBranchName = InputBox.Show("New Branch Name");
+			if (string.IsNullOrEmpty(newBranchName))
+				return;
 			string fromBranchName = InputBox.Show("From Branch Name", "master");
+			if (string.IsNullOrEmpty(fromBranchName))
+				return;
 			RunCommand($"checkout -b {newBranchName} {fromBranchName}");
-		}
-
-		private void statuToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			RunCommand("status");
 		}
 
 		private void clearToolStripMenuItem_Click(object sender, EventArgs e)
@@ -134,6 +133,49 @@ namespace Felix.Tools
 				return;
 
 			RunCommand($"branch -D {branchName}");
+		}
+
+		private void statusToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			RunCommand("status");
+		}
+
+		private void logsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			RunCommand("log");
+		}
+
+		private void addAllToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			RunCommand("add .");
+		}
+
+		private void commitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string comment = InputBox.Show("message");
+			if (string.IsNullOrEmpty(comment))
+				return;
+			RunCommand(@$"commit -m ""{comment}""");
+		}
+
+		private void mergeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string fromBranch = InputBox.Show("From Branch Name");
+			if (string.IsNullOrEmpty(fromBranch))
+				return;
+			string opt = ChooesForm<string>.Show("", "--no-ff", "--squash");
+			if (string.IsNullOrEmpty(opt))
+				return;
+
+			RunCommand($"merge {opt} {fromBranch}");
+		}
+
+		private void raseToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string fromBranch = InputBox.Show("From Branch Name");
+			if (string.IsNullOrEmpty(fromBranch))
+				return;
+			RunCommand($"rebase {fromBranch}");
 		}
 
 		#region Inner Classes
