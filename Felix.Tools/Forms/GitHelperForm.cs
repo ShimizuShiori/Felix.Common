@@ -1,31 +1,8 @@
-﻿using Felix.Tools.Attributes;
-using Felix.Tools.Forms;
-using Felix.Tools.Tools;
+﻿using Felix.Tools.Forms;
 using System.Diagnostics;
 
 namespace Felix.Tools
 {
-	[Tool("GitHelper", "Repo")]
-	public class OpenGitHelperForm : ITool
-	{
-		public void Start()
-		{
-			if (AppContext.SelectedFilePathList.Length > 0)
-			{
-				foreach (var path in AppContext.SelectedFilePathList)
-				{
-					GitHelperForm f = new GitHelperForm(path);
-					f.Show();
-				}
-			}
-			else if (Directory.Exists(AppContext.SelectedText))
-			{
-				GitHelperForm f = new GitHelperForm(AppContext.SelectedText);
-				f.Show();
-			}
-		}
-	}
-
 	public partial class GitHelperForm : Form, IUiMessageListener
 	{
 		readonly IDisposable listener;
@@ -37,6 +14,7 @@ namespace Felix.Tools
 			InitializeComponent();
 			listener = AppContext.RegisterUiMessageListener(this);
 			this.Disposed += TestForm_Disposed;
+			this.statusStrip1.Items[0].Text = this.gitRepoPath;
 		}
 
 		void TestForm_Disposed(object? sender, EventArgs e)
@@ -55,6 +33,11 @@ namespace Felix.Tools
 			{
 				this.textBox1.AppendText(">> git ");
 				this.textBox1.AppendText(gim.Command);
+				this.textBox1.AppendText(Environment.NewLine);
+			}
+			else if(message is GitErrorStartMessage)
+			{
+				this.textBox1.AppendText("======= ERROR ======= ");
 				this.textBox1.AppendText(Environment.NewLine);
 			}
 		}
@@ -77,13 +60,26 @@ namespace Felix.Tools
 					p.StartInfo.UseShellExecute = false;
 					p.StartInfo.RedirectStandardInput = true;
 					p.StartInfo.RedirectStandardOutput = true;
+					p.StartInfo.RedirectStandardError = true;
 
 					p.Start();
 					while (true)
 					{
 						string? str = p.StandardOutput.ReadLine();
 						if (str == null)
+						{
+							int i = 0;
+							while (true)
+							{
+								string? err = p.StandardError.ReadLine();
+								if (err == null)
+									break;
+								if (i++ == 0)
+									AppContext.PublishUiMessage(new GitErrorStartMessage());
+								AppContext.PublishUiMessage(new GitInputMessage(err));
+							}
 							break;
+						}
 						AppContext.PublishUiMessage(new GitOutputMessage(str));
 					}
 				}
@@ -131,11 +127,22 @@ namespace Felix.Tools
 			RunCommand("pull");
 		}
 
+		private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string branchName = InputBox.Show("Branch Name");
+			if (string.IsNullOrEmpty(branchName))
+				return;
+
+			RunCommand($"branch -D {branchName}");
+		}
+
 		#region Inner Classes
 
 		record GitOutputMessage(string Message);
 
 		record GitInputMessage(string Command);
+
+		record GitErrorStartMessage();
 
 		#endregion
 	}

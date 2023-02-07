@@ -34,13 +34,17 @@
 			this.BranchListMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.BranchToMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.statuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.remoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pullToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.statuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.menuStrip1.SuspendLayout();
+			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// textBox1
@@ -75,53 +79,39 @@
 			this.BranchMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BranchListMenuItem,
             this.BranchToMenuItem,
-            this.newToolStripMenuItem});
+            this.newToolStripMenuItem,
+            this.deleteToolStripMenuItem});
 			this.BranchMenuItem.Name = "BranchMenuItem";
-			this.BranchMenuItem.Size = new System.Drawing.Size(150, 45);
+			this.BranchMenuItem.Size = new System.Drawing.Size(150, 48);
 			this.BranchMenuItem.Text = "(&B)ranch";
 			// 
 			// BranchListMenuItem
 			// 
 			this.BranchListMenuItem.Name = "BranchListMenuItem";
-			this.BranchListMenuItem.Size = new System.Drawing.Size(262, 54);
+			this.BranchListMenuItem.Size = new System.Drawing.Size(448, 54);
 			this.BranchListMenuItem.Text = "(&L)ist";
 			this.BranchListMenuItem.Click += new System.EventHandler(this.BranchListMenuItem_Click);
 			// 
 			// BranchToMenuItem
 			// 
 			this.BranchToMenuItem.Name = "BranchToMenuItem";
-			this.BranchToMenuItem.Size = new System.Drawing.Size(262, 54);
+			this.BranchToMenuItem.Size = new System.Drawing.Size(448, 54);
 			this.BranchToMenuItem.Text = "(&T)o";
 			this.BranchToMenuItem.Click += new System.EventHandler(this.BranchToMenuItem_Click);
 			// 
 			// newToolStripMenuItem
 			// 
 			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-			this.newToolStripMenuItem.Size = new System.Drawing.Size(262, 54);
+			this.newToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
 			this.newToolStripMenuItem.Text = "(&N)ew";
 			this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
 			// 
-			// statuToolStripMenuItem
+			// deleteToolStripMenuItem
 			// 
-			this.statuToolStripMenuItem.Name = "statuToolStripMenuItem";
-			this.statuToolStripMenuItem.Size = new System.Drawing.Size(141, 45);
-			this.statuToolStripMenuItem.Text = "(&S)tatus";
-			this.statuToolStripMenuItem.Click += new System.EventHandler(this.statuToolStripMenuItem_Click);
-			// 
-			// consoleToolStripMenuItem
-			// 
-			this.consoleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearToolStripMenuItem});
-			this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
-			this.consoleToolStripMenuItem.Size = new System.Drawing.Size(168, 45);
-			this.consoleToolStripMenuItem.Text = "(&C)onsole";
-			// 
-			// clearToolStripMenuItem
-			// 
-			this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-			this.clearToolStripMenuItem.Size = new System.Drawing.Size(269, 54);
-			this.clearToolStripMenuItem.Text = "(&C)lear";
-			this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+			this.deleteToolStripMenuItem.Text = "(&D)elete";
+			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
 			// 
 			// remoteToolStripMenuItem
 			// 
@@ -135,31 +125,73 @@
 			// pushToolStripMenuItem
 			// 
 			this.pushToolStripMenuItem.Name = "pushToolStripMenuItem";
-			this.pushToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+			this.pushToolStripMenuItem.Size = new System.Drawing.Size(266, 54);
 			this.pushToolStripMenuItem.Text = "Pu(&s)h";
 			this.pushToolStripMenuItem.Click += new System.EventHandler(this.pushToolStripMenuItem_Click);
 			// 
 			// pullToolStripMenuItem
 			// 
 			this.pullToolStripMenuItem.Name = "pullToolStripMenuItem";
-			this.pullToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+			this.pullToolStripMenuItem.Size = new System.Drawing.Size(266, 54);
 			this.pullToolStripMenuItem.Text = "Pu(&l)l";
 			this.pullToolStripMenuItem.Click += new System.EventHandler(this.pullToolStripMenuItem_Click);
 			// 
-			// TestForm
+			// statuToolStripMenuItem
+			// 
+			this.statuToolStripMenuItem.Name = "statuToolStripMenuItem";
+			this.statuToolStripMenuItem.Size = new System.Drawing.Size(141, 48);
+			this.statuToolStripMenuItem.Text = "(&S)tatus";
+			this.statuToolStripMenuItem.Click += new System.EventHandler(this.statuToolStripMenuItem_Click);
+			// 
+			// consoleToolStripMenuItem
+			// 
+			this.consoleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearToolStripMenuItem});
+			this.consoleToolStripMenuItem.Name = "consoleToolStripMenuItem";
+			this.consoleToolStripMenuItem.Size = new System.Drawing.Size(168, 48);
+			this.consoleToolStripMenuItem.Text = "(&C)onsole";
+			// 
+			// clearToolStripMenuItem
+			// 
+			this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+			this.clearToolStripMenuItem.Size = new System.Drawing.Size(269, 54);
+			this.clearToolStripMenuItem.Text = "(&C)lear";
+			this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+			// 
+			// statusStrip1
+			// 
+			this.statusStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
+			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+			this.statusStrip1.Location = new System.Drawing.Point(0, 1858);
+			this.statusStrip1.Name = "statusStrip1";
+			this.statusStrip1.Size = new System.Drawing.Size(1968, 54);
+			this.statusStrip1.TabIndex = 2;
+			this.statusStrip1.Text = "statusStrip1";
+			// 
+			// toolStripStatusLabel1
+			// 
+			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+			this.toolStripStatusLabel1.Size = new System.Drawing.Size(297, 41);
+			this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+			// 
+			// GitHelperForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+			this.BackColor = System.Drawing.SystemColors.Control;
 			this.ClientSize = new System.Drawing.Size(1968, 1912);
+			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.menuStrip1);
-			this.Name = "TestForm";
+			this.Name = "GitHelperForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Git Helper";
 			this.Load += new System.EventHandler(this.TestForm_Load);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
+			this.statusStrip1.ResumeLayout(false);
+			this.statusStrip1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -178,5 +210,8 @@
 		private ToolStripMenuItem remoteToolStripMenuItem;
 		private ToolStripMenuItem pushToolStripMenuItem;
 		private ToolStripMenuItem pullToolStripMenuItem;
+		private StatusStrip statusStrip1;
+		private ToolStripStatusLabel toolStripStatusLabel1;
+		private ToolStripMenuItem deleteToolStripMenuItem;
 	}
 }
