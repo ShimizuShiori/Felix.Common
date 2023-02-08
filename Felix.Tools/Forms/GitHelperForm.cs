@@ -16,6 +16,8 @@ namespace Felix.Tools
 			listener = AppContext.RegisterUiMessageListener(this);
 			this.Disposed += TestForm_Disposed;
 			this.statusStrip1.Items[0].Text = this.gitRepoPath;
+			this.Text += $" @ {gitRepoPath}";
+			this.textBox1.Select(3, 0);
 		}
 
 		void TestForm_Disposed(object? sender, EventArgs e)
@@ -32,7 +34,7 @@ namespace Felix.Tools
 			}
 			else if (message is GitInputMessage gim && gim.FormId == id)
 			{
-				this.textBox1.AppendText(">> git ");
+				this.textBox1.AppendText("git ");
 				this.textBox1.AppendText(gim.Command);
 				this.textBox1.AppendText(Environment.NewLine);
 			}
@@ -40,6 +42,11 @@ namespace Felix.Tools
 			{
 				this.textBox1.AppendText("======= ERROR ======= ");
 				this.textBox1.AppendText(Environment.NewLine);
+			}
+			else if(message is GitCommandEndMessage gcem && gcem.formId == id)
+			{
+				this.textBox1.AppendText(Environment.NewLine);
+				this.textBox1.AppendText(">> ");
 			}
 		}
 
@@ -62,6 +69,7 @@ namespace Felix.Tools
 					p.StartInfo.RedirectStandardInput = true;
 					p.StartInfo.RedirectStandardOutput = true;
 					p.StartInfo.RedirectStandardError = true;
+					p.StartInfo.CreateNoWindow = true;
 
 					p.Start();
 					while (true)
@@ -83,6 +91,7 @@ namespace Felix.Tools
 						}
 						AppContext.PublishUiMessage(new GitOutputMessage(id, str));
 					}
+					AppContext.PublishUiMessage(new GitCommandEndMessage(id));
 				}
 			});
 		}
@@ -201,6 +210,8 @@ namespace Felix.Tools
 		record GitInputMessage(Guid FormId, string Command);
 
 		record GitErrorStartMessage(Guid FormId);
+
+		record GitCommandEndMessage(Guid formId);
 
 		#endregion
 	}
