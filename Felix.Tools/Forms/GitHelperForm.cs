@@ -63,6 +63,7 @@ namespace Felix.Tools
 					p.StartInfo.RedirectStandardInput = true;
 					p.StartInfo.RedirectStandardOutput = true;
 					p.StartInfo.RedirectStandardError = true;
+					p.StartInfo.CreateNoWindow = true;
 
 					p.Start();
 					while (true)
