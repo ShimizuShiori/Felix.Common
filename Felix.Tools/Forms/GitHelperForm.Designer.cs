@@ -72,6 +72,7 @@
 			this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
 			this.textBox1.Size = new System.Drawing.Size(1968, 1854);
 			this.textBox1.TabIndex = 0;
+			this.textBox1.Text = ">> ";
 			// 
 			// menuStrip1
 			// 
