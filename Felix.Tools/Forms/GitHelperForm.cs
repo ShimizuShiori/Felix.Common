@@ -16,6 +16,7 @@ namespace Felix.Tools
 			listener = AppContext.RegisterUiMessageListener(this);
 			this.Disposed += TestForm_Disposed;
 			this.statusStrip1.Items[0].Text = this.gitRepoPath;
+			this.Text += $" @ {gitRepoPath}";
 		}
 
 		void TestForm_Disposed(object? sender, EventArgs e)
