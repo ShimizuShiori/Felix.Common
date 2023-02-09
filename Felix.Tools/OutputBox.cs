@@ -25,10 +25,20 @@ namespace Felix.Tools
 			this.textBox1.Text = text;
 		}
 
-		public static void Show(string text)
+		public static void Show(string text, bool modal = true)
 		{
-			using (var box = new OutputBox(text))
-				box.ShowDialog();
+			if (modal)
+			{
+				using (var box = new OutputBox(text))
+				{
+					box.ShowDialog();
+				}
+			}
+			else
+			{
+				var box = new OutputBox(text);
+				box.Show();
+			}
 		}
 
 		private void button1_Click(object sender, EventArgs e)

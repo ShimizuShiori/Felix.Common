@@ -1,10 +1,14 @@
 ﻿using Felix.Common;
+using Felix.Tools.Forms;
+using Felix.Tools.Messages;
 using System.ComponentModel;
 
 namespace Felix.Tools
 {
-	public partial class StartForm : Form
+	public partial class StartForm : Form, IUiMessageListener
 	{
+		readonly IDisposable listener;
+
 		public StartForm()
 		{
 			InitializeComponent();
@@ -15,6 +19,13 @@ namespace Felix.Tools
 #else
 			bool r = User32.RegisterHotKey(Handle, 1, KeyModifiers.Ctrl, Common.Keys.F1);
 #endif
+			listener = AppContext.RegisterUiMessageListener(this);
+			this.Disposed += StartForm_Disposed;
+		}
+
+		void StartForm_Disposed(object? sender, EventArgs e)
+		{
+			listener.Dispose();
 		}
 
 		protected override void OnClosing(CancelEventArgs e)
@@ -56,6 +67,14 @@ namespace Felix.Tools
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			this.Close();
+		}
+
+		public void OnMessage(object message)
+		{
+			if (message is ShowOutputMessage som)
+			{
+				OutputBox.Show(som.Message, modal: false);
+			}
 		}
 	}
 }
