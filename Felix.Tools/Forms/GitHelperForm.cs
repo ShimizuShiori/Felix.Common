@@ -43,7 +43,7 @@ namespace Felix.Tools
 				this.textBox1.AppendText("======= ERROR ======= ");
 				this.textBox1.AppendText(Environment.NewLine);
 			}
-			else if(message is GitCommandEndMessage gcem && gcem.formId == id)
+			else if (message is GitCommandEndMessage gcem && gcem.formId == id)
 			{
 				this.textBox1.AppendText(Environment.NewLine);
 				this.textBox1.AppendText(">> ");
@@ -96,11 +96,6 @@ namespace Felix.Tools
 			});
 		}
 
-		private void BranchListMenuItem_Click(object sender, EventArgs e)
-		{
-			RunCommand("branch");
-		}
-
 		private void BranchToMenuItem_Click(object sender, EventArgs e)
 		{
 			string branchName = InputBox.Show("Branch Name");
@@ -128,7 +123,10 @@ namespace Felix.Tools
 
 		private void pushToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			RunCommand("push");
+			string branchName = InputBox.Show("Branch Name");
+			if (string.IsNullOrEmpty(branchName))
+				return;
+			RunCommand($"push -u origin {branchName}:{branchName}");
 		}
 
 		private void pullToolStripMenuItem_Click(object sender, EventArgs e)
@@ -201,6 +199,21 @@ namespace Felix.Tools
 		private void revertToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			RunCommand("checkout .");
+		}
+
+		private void localToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			RunCommand("branch");
+		}
+
+		private void remoteToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			RunCommand("branch -r");
+		}
+
+		private void fetchToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			RunCommand("fetch");
 		}
 
 		#region Inner Classes

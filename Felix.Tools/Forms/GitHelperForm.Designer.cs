@@ -32,6 +32,8 @@
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.BranchMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.BranchListMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.localToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.remoteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.BranchToMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,6 +57,7 @@
 			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.fetchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -106,10 +109,26 @@
 			// 
 			// BranchListMenuItem
 			// 
+			this.BranchListMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.localToolStripMenuItem,
+            this.remoteToolStripMenuItem1});
 			this.BranchListMenuItem.Name = "BranchListMenuItem";
 			this.BranchListMenuItem.Size = new System.Drawing.Size(297, 58);
 			this.BranchListMenuItem.Text = "&List";
-			this.BranchListMenuItem.Click += new System.EventHandler(this.BranchListMenuItem_Click);
+			// 
+			// localToolStripMenuItem
+			// 
+			this.localToolStripMenuItem.Name = "localToolStripMenuItem";
+			this.localToolStripMenuItem.Size = new System.Drawing.Size(318, 58);
+			this.localToolStripMenuItem.Text = "&Local";
+			this.localToolStripMenuItem.Click += new System.EventHandler(this.localToolStripMenuItem_Click);
+			// 
+			// remoteToolStripMenuItem1
+			// 
+			this.remoteToolStripMenuItem1.Name = "remoteToolStripMenuItem1";
+			this.remoteToolStripMenuItem1.Size = new System.Drawing.Size(318, 58);
+			this.remoteToolStripMenuItem1.Text = "&Remote";
+			this.remoteToolStripMenuItem1.Click += new System.EventHandler(this.remoteToolStripMenuItem1_Click);
 			// 
 			// BranchToMenuItem
 			// 
@@ -136,7 +155,8 @@
 			// 
 			this.remoteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pushToolStripMenuItem,
-            this.pullToolStripMenuItem});
+            this.pullToolStripMenuItem,
+            this.fetchToolStripMenuItem});
 			this.remoteToolStripMenuItem.Name = "remoteToolStripMenuItem";
 			this.remoteToolStripMenuItem.Size = new System.Drawing.Size(172, 54);
 			this.remoteToolStripMenuItem.Text = "&Remote";
@@ -144,14 +164,14 @@
 			// pushToolStripMenuItem
 			// 
 			this.pushToolStripMenuItem.Name = "pushToolStripMenuItem";
-			this.pushToolStripMenuItem.Size = new System.Drawing.Size(271, 58);
+			this.pushToolStripMenuItem.Size = new System.Drawing.Size(448, 58);
 			this.pushToolStripMenuItem.Text = "Pu&sh";
 			this.pushToolStripMenuItem.Click += new System.EventHandler(this.pushToolStripMenuItem_Click);
 			// 
 			// pullToolStripMenuItem
 			// 
 			this.pullToolStripMenuItem.Name = "pullToolStripMenuItem";
-			this.pullToolStripMenuItem.Size = new System.Drawing.Size(271, 58);
+			this.pullToolStripMenuItem.Size = new System.Drawing.Size(448, 58);
 			this.pullToolStripMenuItem.Text = "Pu&ll";
 			this.pullToolStripMenuItem.Click += new System.EventHandler(this.pullToolStripMenuItem_Click);
 			// 
@@ -286,6 +306,13 @@
 			this.toolStripStatusLabel1.Size = new System.Drawing.Size(371, 50);
 			this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
 			// 
+			// fetchToolStripMenuItem
+			// 
+			this.fetchToolStripMenuItem.Name = "fetchToolStripMenuItem";
+			this.fetchToolStripMenuItem.Size = new System.Drawing.Size(448, 58);
+			this.fetchToolStripMenuItem.Text = "&Fetch";
+			this.fetchToolStripMenuItem.Click += new System.EventHandler(this.fetchToolStripMenuItem_Click);
+			// 
 			// GitHelperForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
@@ -336,5 +363,8 @@
 		private ToolStripMenuItem stageToolStripMenuItem;
 		private ToolStripMenuItem restoreToolStripMenuItem;
 		private ToolStripMenuItem revertToolStripMenuItem;
+		private ToolStripMenuItem localToolStripMenuItem;
+		private ToolStripMenuItem remoteToolStripMenuItem1;
+		private ToolStripMenuItem fetchToolStripMenuItem;
 	}
 }
