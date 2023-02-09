@@ -73,7 +73,7 @@ namespace Felix.Tools
 		{
 			if (message is ShowOutputMessage som)
 			{
-				OutputBox.Show(som.Message);
+				OutputBox.Show(som.Message, modal: false);
 			}
 		}
 	}
