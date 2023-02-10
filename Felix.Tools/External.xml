@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Tools>
+  <Tool Category="Open" Name="MarkText">
+    <Exec>C:\Users\Felix.Fei\AppData\Local\Programs\MarkText\MarkText.exe</Exec>
+    <Arg>"{SelectedText}"</Arg>
+  </Tool>
+  <Tool Category="Repo" Name="CW Tool">
+    <Exec>C:\Tools\CW Tools\CW Tools.exe</Exec>
+  </Tool>
+  <Tool Category="Repo" Name="QGL">
+    <Exec>C:\Program Files (x86)\WiseTech Global\Quick Get Latest\Quick Get Latest.exe</Exec>
+  </Tool>
+  <Tool Category="VPN" Name="GlobalProtected">
+    <Exec>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Palo Alto Networks\GlobalProtect\GlobalProtect.lnk</Exec>
+  </Tool>
+</Tools>
