@@ -9,35 +9,42 @@ namespace Felix.Tools
 	{
 		public void Start()
 		{
+			GitHelperForm f;
 			if (AppContext.SelectedFilePathList.Length > 0)
 			{
+				bool shown = false;
 				foreach (var path in AppContext.SelectedFilePathList)
 				{
-					GitHelperForm f = new GitHelperForm(path);
+					if (!Directory.Exists(Path.Combine(path, ".git")))
+						continue;
+					f = new GitHelperForm(path);
 					f.Show();
+					shown = true;
 				}
-			}
-			else if (Directory.Exists(AppContext.SelectedText))
-			{
-				GitHelperForm f = new GitHelperForm(AppContext.SelectedText);
-				f.Show();
-			}
-			else
-			{
-
-				var selected = ChooesForm<(string, string[])>.Show(
-					TFSInfos.GetProjects());
-
-				if (selected == "")
+				if (shown)
 					return;
-
-				var selected2 = ChooesForm<string>.Show(TFSInfos.GetRepos(selected));
-				if (selected2 == "")
-					return;
-
-				GitHelperForm f = new GitHelperForm($@"C:\git\wtg\{selected}\{selected2}");
-				f.Show();
 			}
+
+			if (Directory.Exists(Path.Combine(AppContext.SelectedText, ".git")))
+			{
+				f = new GitHelperForm(AppContext.SelectedText);
+				f.Show();
+				return;
+			}
+
+			var selected = ChooesForm<(string, string[])>.Show(
+				TFSInfos.GetProjects());
+
+			if (selected == "")
+				return;
+
+			var selected2 = ChooesForm<string>.Show(TFSInfos.GetRepos(selected));
+			if (selected2 == "")
+				return;
+
+			f = new GitHelperForm($@"C:\git\wtg\{selected}\{selected2}");
+			f.Show();
+
 		}
 	}
 }

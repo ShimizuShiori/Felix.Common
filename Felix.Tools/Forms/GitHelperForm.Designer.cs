@@ -40,6 +40,7 @@
 			this.remoteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pushToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pullToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.fetchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.statuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.statusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -55,11 +56,7 @@
 			this.revertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.consoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-			this.fetchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
-			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// textBox1
@@ -164,16 +161,23 @@
 			// pushToolStripMenuItem
 			// 
 			this.pushToolStripMenuItem.Name = "pushToolStripMenuItem";
-			this.pushToolStripMenuItem.Size = new System.Drawing.Size(448, 58);
+			this.pushToolStripMenuItem.Size = new System.Drawing.Size(280, 58);
 			this.pushToolStripMenuItem.Text = "Pu&sh";
 			this.pushToolStripMenuItem.Click += new System.EventHandler(this.pushToolStripMenuItem_Click);
 			// 
 			// pullToolStripMenuItem
 			// 
 			this.pullToolStripMenuItem.Name = "pullToolStripMenuItem";
-			this.pullToolStripMenuItem.Size = new System.Drawing.Size(448, 58);
+			this.pullToolStripMenuItem.Size = new System.Drawing.Size(280, 58);
 			this.pullToolStripMenuItem.Text = "Pu&ll";
 			this.pullToolStripMenuItem.Click += new System.EventHandler(this.pullToolStripMenuItem_Click);
+			// 
+			// fetchToolStripMenuItem
+			// 
+			this.fetchToolStripMenuItem.Name = "fetchToolStripMenuItem";
+			this.fetchToolStripMenuItem.Size = new System.Drawing.Size(280, 58);
+			this.fetchToolStripMenuItem.Text = "&Fetch";
+			this.fetchToolStripMenuItem.Click += new System.EventHandler(this.fetchToolStripMenuItem_Click);
 			// 
 			// statuToolStripMenuItem
 			// 
@@ -288,38 +292,12 @@
 			this.clearToolStripMenuItem.Text = "&Clear";
 			this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
 			// 
-			// statusStrip1
-			// 
-			this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.statusStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
-			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 1849);
-			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(1968, 63);
-			this.statusStrip1.TabIndex = 2;
-			this.statusStrip1.Text = "statusStrip1";
-			// 
-			// toolStripStatusLabel1
-			// 
-			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-			this.toolStripStatusLabel1.Size = new System.Drawing.Size(371, 50);
-			this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-			// 
-			// fetchToolStripMenuItem
-			// 
-			this.fetchToolStripMenuItem.Name = "fetchToolStripMenuItem";
-			this.fetchToolStripMenuItem.Size = new System.Drawing.Size(448, 58);
-			this.fetchToolStripMenuItem.Text = "&Fetch";
-			this.fetchToolStripMenuItem.Click += new System.EventHandler(this.fetchToolStripMenuItem_Click);
-			// 
 			// GitHelperForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.SystemColors.Control;
 			this.ClientSize = new System.Drawing.Size(1968, 1912);
-			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.menuStrip1);
 			this.Name = "GitHelperForm";
@@ -328,8 +306,6 @@
 			this.Load += new System.EventHandler(this.TestForm_Load);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
-			this.statusStrip1.ResumeLayout(false);
-			this.statusStrip1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -348,8 +324,6 @@
 		private ToolStripMenuItem remoteToolStripMenuItem;
 		private ToolStripMenuItem pushToolStripMenuItem;
 		private ToolStripMenuItem pullToolStripMenuItem;
-		private StatusStrip statusStrip1;
-		private ToolStripStatusLabel toolStripStatusLabel1;
 		private ToolStripMenuItem deleteToolStripMenuItem;
 		private ToolStripMenuItem statusToolStripMenuItem;
 		private ToolStripSeparator toolStripSeparator1;
