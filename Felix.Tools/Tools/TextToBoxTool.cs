@@ -14,6 +14,12 @@ namespace Felix.Tools.Tools
 			string text = AppContext.SelectedText.Replace("\t", "    ");
 			string[] lines = text.Split(Environment.NewLine);
 			var boxSize = GetMaxWidth(boxWidth, lines);
+			string title = string.Empty;
+
+			if (boxSize.Height > 1)
+			{
+				title = InputBox.Show("Title", string.Empty);
+			}
 
 			var sb = new StringBuilder((boxSize.Width + 4) * (boxSize.Height + 4));
 
@@ -21,6 +27,17 @@ namespace Felix.Tools.Tools
 			sb.Append("+-");
 			sb.Append("-".Repeat(boxSize.Width));
 			sb.AppendLine("-+");
+
+			if(!string.IsNullOrEmpty(title))
+			{
+				sb.Append("| ");
+				sb.Append(title.AdjustToEnd(boxSize.Width));
+				sb.AppendLine(" |");
+
+				sb.Append("+-");
+				sb.Append("-".Repeat(boxSize.Width));
+				sb.AppendLine("-+");
+			}
 
 			if (lines.Length > 1)
 			{
@@ -55,6 +72,8 @@ namespace Felix.Tools.Tools
 			sb.Append("+-");
 			sb.Append("-".Repeat(boxSize.Width));
 			sb.AppendLine("-+");
+
+			sb.AppendLine();
 
 			OutputBox.Show(sb.ToString());
 			return;
