@@ -21,7 +21,7 @@ namespace Felix.Common
 				.Value;
 		}
 
-		public static string AdjustToLeft(this string value, int toLength)
+		public static string AdjustToEnd(this string value, int toLength)
 		{
 			StringBuilder sb = new StringBuilder(toLength);
 			sb.Append(value);
