@@ -144,5 +144,21 @@
 				return form.value;
 			}
 		}
+
+		public static T Show<T>(string title, string defaultValue, Func<string, T> converter)
+		{
+			while (true)
+			{
+				string v = Show(title, defaultValue);
+				try
+				{
+					return converter(v);
+				}
+				catch (Exception)
+				{
+					continue;
+				}
+			}
+		}
 	}
 }

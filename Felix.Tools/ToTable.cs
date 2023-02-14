@@ -41,7 +41,7 @@ namespace Felix.Tools
 				sb.Append("|");
 				sb.Append(line.Select((word, index) =>
 				{
-					return word.AdjustToLeft(maxWidthForEachColumn[index]);
+					return word.AdjustToEnd(maxWidthForEachColumn[index]);
 				}).Select(x => $" {x} ")
 				.JoinAsString("|"));
 				sb.AppendLine("|");
