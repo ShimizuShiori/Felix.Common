@@ -9,64 +9,94 @@ namespace Felix.Tools.Tools
 	{
 		public void Start()
 		{
+			int boxWidth = InputBox.Show<int>("Width", "200", s => int.Parse(s));
+
 			string text = AppContext.SelectedText.Replace("\t", "    ");
 			string[] lines = text.Split(Environment.NewLine);
-			int maxWidth = GetMaxWidth(lines);
+			var boxSize = GetMaxWidth(boxWidth, lines);
+			string title = string.Empty;
 
-			var sb = new StringBuilder((maxWidth + 4) * (lines.Length + 4));
+			if (boxSize.Height > 1)
+			{
+				title = InputBox.Show("Title", string.Empty);
+			}
+
+			var sb = new StringBuilder((boxSize.Width + 4) * (boxSize.Height + 4));
 
 			// First Line
 			sb.Append("+-");
-			sb.Append("-".Repeat(maxWidth));
+			sb.Append("-".Repeat(boxSize.Width));
 			sb.AppendLine("-+");
+
+			if(!string.IsNullOrEmpty(title))
+			{
+				sb.Append("| ");
+				sb.Append(title.AdjustToEnd(boxSize.Width));
+				sb.AppendLine(" |");
+
+				sb.Append("+-");
+				sb.Append("-".Repeat(boxSize.Width));
+				sb.AppendLine("-+");
+			}
 
 			if (lines.Length > 1)
 			{
 				// Space line
 				sb.Append("| ");
-				sb.Append(" ".Repeat(maxWidth));
+				sb.Append(" ".Repeat(boxSize.Width));
 				sb.AppendLine(" |");
 			}
 
 			// Content
 			foreach (var line in lines)
 			{
-				sb.Append("| ");
-				sb.Append(line);
-				sb.Append(" ".Repeat(maxWidth - line.Length));
-				sb.AppendLine(" |");
+				var ps = line.Length / boxSize.Width + 1;
+				var changedLine = line.AdjustToEnd(ps * boxSize.Width);
+				for (int p = 0; p < line.Length / boxSize.Width + 1; p++)
+				{
+					sb.Append("| ");
+					sb.Append(changedLine.Substring(p * boxSize.Width, boxSize.Width));
+					sb.AppendLine(" |");
+				}
 			}
 
 			if (lines.Length > 1)
 			{
 				// Space line
 				sb.Append("| ");
-				sb.Append(" ".Repeat(maxWidth));
+				sb.Append(" ".Repeat(boxSize.Width));
 				sb.AppendLine(" |");
 			}
 
 			// Last Line
 			sb.Append("+-");
-			sb.Append("-".Repeat(maxWidth));
+			sb.Append("-".Repeat(boxSize.Width));
 			sb.AppendLine("-+");
+
+			sb.AppendLine();
 
 			OutputBox.Show(sb.ToString());
 			return;
 		}
 
-		private int GetMaxWidth(string[] lines)
+		BoxSize GetMaxWidth(int boxWidth, string[] lines)
 		{
 			int maxWidth = 0;
+			int height = 0;
 			foreach (var line in lines)
 			{
 				int width = GetWidth(line);
+				if (width > boxWidth)
+					width = boxWidth;
 				if (width > maxWidth)
 					maxWidth = width;
+
+				height += (width / boxWidth) + 1;
 			}
-			return maxWidth;
+			return new BoxSize(maxWidth, height);
 		}
 
-		private int GetWidth(string line)
+		int GetWidth(string line)
 		{
 			int i = 0;
 			foreach (var c in line)
@@ -75,5 +105,7 @@ namespace Felix.Tools.Tools
 			}
 			return i;
 		}
+
+		record BoxSize(int Width, int Height);
 	}
 }
