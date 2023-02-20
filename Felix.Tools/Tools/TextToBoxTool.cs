@@ -9,15 +9,15 @@ namespace Felix.Tools.Tools
 	{
 		public void Start()
 		{
-			int boxWidth = InputBox.Show<int>("Width", "200", s => int.Parse(s));
 			string title = InputBox.Show("Title", string.Empty);
+			int boxWidth = InputBox.Show<int>("Width", title.Length > 200 ? title.Length.ToString() : "200", s => int.Parse(s));
+			if (boxWidth < title.Length)
+				boxWidth = title.Length;
 
 			string text = AppContext.SelectedText.Replace("\t", "    ");
 			string[] lines = text.Split(Environment.NewLine).Select(x => x.Length == 0 ? " " : x).ToArray();
-			
-			
-			var boxSize = GetMaxWidth(boxWidth, lines);
 
+			var boxSize = GetMaxWidth(boxWidth, lines);
 
 			var sb = new StringBuilder((boxSize.Width + 4) * (boxSize.Height + 4));
 
