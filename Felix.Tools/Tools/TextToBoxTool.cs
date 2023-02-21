@@ -9,17 +9,15 @@ namespace Felix.Tools.Tools
 	{
 		public void Start()
 		{
-			int boxWidth = InputBox.Show<int>("Width", "200", s => int.Parse(s));
+			string title = InputBox.Show("Title", string.Empty);
+			int boxWidth = InputBox.Show<int>("Width", title.Length > 200 ? title.Length.ToString() : "200", s => int.Parse(s));
+			if (boxWidth < title.Length)
+				boxWidth = title.Length;
 
 			string text = AppContext.SelectedText.Replace("\t", "    ");
-			string[] lines = text.Split(Environment.NewLine);
-			var boxSize = GetMaxWidth(boxWidth, lines);
-			string title = string.Empty;
+			string[] lines = text.Split(Environment.NewLine).Select(x => x.Length == 0 ? " " : x).ToArray();
 
-			if (boxSize.Height > 1)
-			{
-				title = InputBox.Show("Title", string.Empty);
-			}
+			var boxSize = GetMaxWidth(boxWidth, lines);
 
 			var sb = new StringBuilder((boxSize.Width + 4) * (boxSize.Height + 4));
 
@@ -28,7 +26,7 @@ namespace Felix.Tools.Tools
 			sb.Append("-".Repeat(boxSize.Width));
 			sb.AppendLine("-+");
 
-			if(!string.IsNullOrEmpty(title))
+			if (!string.IsNullOrEmpty(title))
 			{
 				sb.Append("| ");
 				sb.Append(title.AdjustToEnd(boxSize.Width));
@@ -50,9 +48,9 @@ namespace Felix.Tools.Tools
 			// Content
 			foreach (var line in lines)
 			{
-				var ps = line.Length / boxSize.Width + 1;
+				var ps = (line.Length - 1) / boxSize.Width + 1;
 				var changedLine = line.AdjustToEnd(ps * boxSize.Width);
-				for (int p = 0; p < line.Length / boxSize.Width + 1; p++)
+				for (int p = 0; p < ps; p++)
 				{
 					sb.Append("| ");
 					sb.Append(changedLine.Substring(p * boxSize.Width, boxSize.Width));
@@ -83,16 +81,23 @@ namespace Felix.Tools.Tools
 		{
 			int maxWidth = 0;
 			int height = 0;
-			foreach (var line in lines)
+			var widthList = lines.Select(x => GetWidth(x)).ToArray();
+
+			for (int i = 0; i < widthList.Length; i++)
 			{
-				int width = GetWidth(line);
+				ref var width = ref widthList[i];
 				if (width > boxWidth)
 					width = boxWidth;
 				if (width > maxWidth)
 					maxWidth = width;
-
-				height += (width / boxWidth) + 1;
 			}
+
+			foreach (var width in widthList)
+			{
+				height += (width - 1) / maxWidth + 1;
+			}
+
+
 			return new BoxSize(maxWidth, height);
 		}
 
