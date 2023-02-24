@@ -58,23 +58,36 @@ namespace Felix.Tools
 
 		char FindSpliter(string[] lines)
 		{
+			char suspectedChar = '0';
+
 			foreach (var spliter in new char[] { ',', '\t', ' ', '|' })
 			{
-				if (IsSpliterForLines(lines, spliter))
-					return spliter;
+				switch (IsSpliterForLines(lines,spliter))
+				{
+					case IsSpliterForLinesResult.Yes:
+						return spliter;
+					case IsSpliterForLinesResult.Suspect:
+						suspectedChar = spliter;
+						continue;
+					default:
+						continue;
+				}
 			}
-			return '0';
+			return suspectedChar;
 		}
 
-		private bool IsSpliterForLines(string[] lines, char spliter)
+		private IsSpliterForLinesResult IsSpliterForLines(string[] lines, char spliter)
 		{
 			int columns = lines[0].Split(spliter).Length;
 			for (int i = 1; i < lines.Length; i++)
 			{
 				if (columns != lines[i].Split(spliter).Length)
-					return false;
+					return IsSpliterForLinesResult.No;
 			}
-			return true;
+			if (columns == 1)
+				return IsSpliterForLinesResult.Suspect;
+
+			return IsSpliterForLinesResult.Yes;
 		}
 
 		private int[] GetMaxWidthForEachColumn(IEnumerable<string[]> lines, int columnSize)
@@ -90,6 +103,13 @@ namespace Felix.Tools
 				}
 			}
 			return result;
+		}
+
+		enum IsSpliterForLinesResult
+		{
+			No,
+			Suspect,
+			Yes
 		}
 	}
 }
