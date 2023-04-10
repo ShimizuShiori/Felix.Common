@@ -8,6 +8,8 @@ namespace Felix.Tools
 		string selectedKey = string.Empty;
 		string filter = string.Empty;
 		IList<Button> buttons;
+		System.Windows.Forms.Timer timer;
+
 		protected ChooesForm(IDictionary<string, T> choices)
 		{
 			this._choices = choices;
@@ -16,8 +18,19 @@ namespace Felix.Tools
 			this.StartPosition = FormStartPosition.CenterScreen;
 			this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 			this.AutoSize = true;
-			this.TopMost = true;
 			this.Shown += ChooesForm_Shown;
+
+			timer = new System.Windows.Forms.Timer();
+			timer.Interval = 100;
+			timer.Enabled = true;
+			timer.Tick += (sender, e) =>
+			{
+				timer.Interval = timer.Interval * 2;
+				this.Activate();
+				this.buttons[0].Focus();
+				this.TopMost = true;
+			};
+
 			DrawButtons();
 		}
 
@@ -76,6 +89,7 @@ namespace Felix.Tools
 
 			btn.Click += (sender, e) =>
 			{
+				this.timer.Stop();
 				this.Close();
 			};
 
