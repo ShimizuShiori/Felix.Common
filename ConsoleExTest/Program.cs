@@ -1,5 +1,6 @@
 ﻿using Felix.Common;
 using System.Diagnostics;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -11,11 +12,42 @@ namespace ConsoleExTest
 
 		static void Main(string[] args)
 		{
-			var ps = Process.GetProcessesByName("firefox");
-			string str = "/api/user/password/reset_request?t=1671007875";
+			FieldInfo f;
 
-			Console.WriteLine(DateTimeOffset.Now.ToUnixTimeSeconds());
-			Console.WriteLine(MD5Encrypt32(str));
+			using (var client = new HttpClient())
+			{
+				client.MaxResponseContentBufferSize = 1;
+				var res = client.GetStreamAsync("http://www.baidu.com")
+					.GetAwaiter()
+					.GetResult();
+
+				f = res.GetType().GetField("_contentBytesRemaining", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+			}
+
+			Stopwatch stopwatch = Stopwatch.StartNew();
+			using (var client = new HttpClient())
+			{
+				client.MaxResponseContentBufferSize = 1;
+				var res = client.GetStreamAsync("https://aod.cos.tx.xmcdn.com/group80/M00/66/8C/wKgPEV7MksGBEkH8AJtZ211J2mk729-aacv2-48K.m4a")
+					.GetAwaiter()
+					.GetResult();
+				stopwatch.Stop();
+				Console.WriteLine(stopwatch.ElapsedMilliseconds);
+
+				Console.WriteLine(f.GetValue(res));
+			}
+
+			stopwatch = Stopwatch.StartNew();
+			using (var client = new HttpClient())
+			{
+				//client.MaxResponseContentBufferSize = 1;
+				var res = client.GetAsync("https://aod.cos.tx.xmcdn.com/group80/M00/66/8C/wKgPEV7MksGBEkH8AJtZ211J2mk729-aacv2-48K.m4a")
+					.GetAwaiter()
+					.GetResult();
+				stopwatch.Stop();
+				Console.WriteLine(stopwatch.ElapsedMilliseconds);
+				Console.WriteLine(res.Content.Headers.ContentLength);
+			}
 			Console.ReadLine();
 		}
 
