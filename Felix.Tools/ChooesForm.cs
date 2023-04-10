@@ -21,11 +21,14 @@ namespace Felix.Tools
 			this.Shown += ChooesForm_Shown;
 
 			timer = new System.Windows.Forms.Timer();
+			timer.Interval = 100;
 			timer.Enabled = true;
 			timer.Tick += (sender, e) =>
 			{
+				timer.Interval = timer.Interval * 2;
 				this.Activate();
 				this.buttons[0].Focus();
+				this.TopMost = true;
 			};
 
 			DrawButtons();
