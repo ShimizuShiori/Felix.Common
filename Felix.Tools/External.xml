@@ -4,6 +4,12 @@
     <Exec>C:\Users\Felix.Fei\AppData\Local\Programs\MarkText\MarkText.exe</Exec>
     <Arg>"{SelectedText}"</Arg>
   </Tool>
+  <Tool Category="Open" Name="Github">
+    <Exec>C:\Users\Felix.Fei\AppData\Local\GitHubDesktop\GitHubDesktop.exe</Exec>
+  </Tool>
+  <Tool Category="Open" Name="RegexTool">
+    <Exec>C:\Users\Felix.Fei\AppData\Local\Google\Chrome\Application\chrome_proxy.exe  --profile-directory=Default --app-id=mieeeicebdcmkffkjflneedodiidgpfp</Exec>
+  </Tool>
   <Tool Category="Repo" Name="CW Tool">
     <Exec>C:\Tools\CW Tools\CW Tools.exe</Exec>
   </Tool>
@@ -12,5 +18,13 @@
   </Tool>
   <Tool Category="VPN" Name="GlobalProtected">
     <Exec>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Palo Alto Networks\GlobalProtect\GlobalProtect.lnk</Exec>
+  </Tool>
+  <Tool Category="EdiProd" Name="EdiProd">
+    <WorkingDirectory>C:\Program Files (x86)\WiseTech Global\WiseCloud CORP Client</WorkingDirectory>
+    <Exec>WiseCloudClient.exe</Exec>
+    <Arg>run RDPV1 CW ediProd</Arg>
+  </Tool>
+  <Tool Category="Glow" Name="PB">
+    <Exec>C:\git\wtg\Glow\Glow\DotNet\Bin\PlatformBuilder\CargoWiseOne.PlatformBuilder.exe</Exec>
   </Tool>
 </Tools>

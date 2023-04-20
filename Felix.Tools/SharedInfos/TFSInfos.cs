@@ -17,6 +17,11 @@
 				"Glow",
 				"Shared"
 			};
+			repos["Shared"] = new string[]
+			{
+				"WTG.Foundation",
+				"WTG.ErrorReporting"
+			};
 		}
 
 		public static IEnumerable<string> GetProjects()

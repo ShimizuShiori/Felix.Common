@@ -4,19 +4,17 @@ namespace Felix.Tools.Tools
 {
 	class ExternalTool : ITool
 	{
-		readonly string exec;
-		readonly string arg;
+		readonly Felix.Tools.Mapping.ExternalTool tool;
 
-		public ExternalTool(string exec, string arg)
+		public ExternalTool(Felix.Tools.Mapping.ExternalTool tool)
 		{
-			this.exec = exec;
-			this.arg = arg;
+			this.tool = tool;
 		}
 
 		public void Start()
 		{
-			string realExec = exec;
-			string realArg = arg;
+			string realExec = tool.Exec;
+			string realArg = tool.Arg;
 			foreach (var property in typeof(AppContext).GetProperties())
 			{
 				object value = property.GetValue(null);
@@ -31,6 +29,8 @@ namespace Felix.Tools.Tools
 			psi.UseShellExecute = true;
 			psi.FileName = realExec;
 			psi.Arguments = realArg;
+			if (!string.IsNullOrEmpty(tool.WorkingDirectory))
+				psi.WorkingDirectory = tool.WorkingDirectory;
 			using (var p = new Process())
 			{
 				p.StartInfo = psi;

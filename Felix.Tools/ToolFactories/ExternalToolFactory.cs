@@ -23,7 +23,7 @@ namespace Felix.Tools.ToolFactories
 			if (info == null)
 				return NullTool.Default;
 
-			return new Tools.ExternalTool(info.Exec, info.Arg);
+			return new Tools.ExternalTool(info);
 		}
 
 		public IEnumerable<string> GetCategories()

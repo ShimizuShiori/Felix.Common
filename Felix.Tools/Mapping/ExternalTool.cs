@@ -15,5 +15,8 @@ namespace Felix.Tools.Mapping
 
 		[XmlElement("Arg")]
 		public string Arg { get; set; } = string.Empty;
+
+		[XmlElement("WorkingDirectory")]
+		public string WorkingDirectory { get; set; } = string.Empty;
 	}
 }
