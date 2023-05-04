@@ -1,0 +1,1 @@
+﻿dotnet tool update --add-source ./nukpg SmartCopy

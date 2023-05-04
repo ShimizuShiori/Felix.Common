@@ -27,4 +27,9 @@
   <Tool Category="Glow" Name="PB">
     <Exec>C:\git\wtg\Glow\Glow\DotNet\Bin\PlatformBuilder\CargoWiseOne.PlatformBuilder.exe</Exec>
   </Tool>
+  <Tool Category="Glow" Name="WatchDsk">
+    <WorkingDirectory>C:\git\wtg\Glow\Glow\DotNet\HTML\Client\Client</WorkingDirectory>
+    <Exec>CMD</Exec>
+    <Arg>/k npm run watch-dsk</Arg>
+  </Tool>
 </Tools>

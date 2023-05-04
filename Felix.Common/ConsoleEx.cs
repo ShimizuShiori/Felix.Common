@@ -41,6 +41,12 @@
 			return currentPosition;
 		}
 
+		public static string Input(string label)
+		{
+			Console.Write(label);
+			return Console.ReadLine() ?? string.Empty;
+		}
+
 		static ConsolePosition WriteLine(string content, ConsolePosition position)
 		{
 			Console.CursorTop = position.Top;
