@@ -60,9 +60,9 @@ namespace Felix.Tools
 		{
 			char suspectedChar = '0';
 
-			foreach (var spliter in new char[] { ',', '\t', ' ', '|' })
+			foreach (var spliter in new char[] { '|', ',', '\t', ' ' })
 			{
-				switch (IsSpliterForLines(lines,spliter))
+				switch (IsSpliterForLines(lines, spliter))
 				{
 					case IsSpliterForLinesResult.Yes:
 						return spliter;

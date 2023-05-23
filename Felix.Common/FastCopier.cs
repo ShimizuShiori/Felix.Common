@@ -22,10 +22,5 @@ namespace Felix.Common
 			Copied,
 			Skipped
 		}
-
-		public static void Copy(string source, string dist, Comparer comparer = Comparer.TimeAndLength, Action<string, Result> reporter)
-		{
-
-		}
 	}
 }
