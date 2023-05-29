@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Felix.Common\Felix.Common.csproj" />
   </ItemGroup>
 

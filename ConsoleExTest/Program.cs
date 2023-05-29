@@ -1,6 +1,5 @@
 ﻿using Felix.Common;
 using System.Diagnostics;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -9,46 +8,75 @@ namespace ConsoleExTest
 	internal class Program
 	{
 		static GitRunner runner = new GitRunner(@"C:\git\wtg\CargoWise\Dev");
+		static Queue<string> cmds = new Queue<string>();
+		public static void MonitorCpuUsage(string processName, int interval)
+		{
+			var counterName = "% Processor Time";
+			var categoryName = "Process";
+			var instanceName = Process.GetProcessesByName(processName)[0].ProcessName;
+			var counterForCpu = new PerformanceCounter(categoryName, counterName, instanceName, true);
+			var counterForRAM = new PerformanceCounter("Process", "Working Set - Private", instanceName, true);
+			float maxCpu = 0;
+			float maxRAM = 0;
+			while (true)
+			{
+				Queue<string> local = new Queue<string>();
+				lock (cmds)
+				{
+					while (cmds.Count > 0)
+						local.Enqueue(cmds.Dequeue());
+				}
+				while (local.Count > 0)
+				{
+					var cmd = local.Dequeue();
+					if (cmd == "reset")
+					{
+						maxCpu = 0;
+						maxRAM = 0;
+					}
+				}
+				var cpuUsage = counterForCpu.NextValue();
+				var ram = counterForRAM.NextValue();
+				bool updated = false;
+				if (cpuUsage > maxCpu)
+				{
+					maxCpu = cpuUsage;
+					updated = true;
+				}
+				if (ram > maxRAM)
+				{
+					maxRAM = ram;
+					updated = true;
+				}
+				if (updated)
+				{
+					Console.Clear();
+					Console.WriteLine($"Max CPU Usage of {processName}: {maxCpu / 16}%");
+					{
+						var showValue = new Tuple<float, string>(maxRAM / 1024 / 1024, "M");
+						if (showValue.Item1 > 1024)
+						{
+							showValue = new Tuple<float, string>(showValue.Item1 / 1024, "G");
+						}
+
+						Console.WriteLine($"Max RAM of {processName}: {showValue.Item1} {showValue.Item2}");
+					}
+				}
+				Thread.Sleep(interval);
+			}
+		}
 
 		static void Main(string[] args)
 		{
-			FieldInfo f;
-
-			using (var client = new HttpClient())
+			new Thread(() => MonitorCpuUsage("w3wp", 1000)).Start();
+			while (true)
 			{
-				client.MaxResponseContentBufferSize = 1;
-				var res = client.GetStreamAsync("http://www.baidu.com")
-					.GetAwaiter()
-					.GetResult();
-
-				f = res.GetType().GetField("_contentBytesRemaining", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+				var cmd = Console.ReadLine();
+				if (cmd == "exit")
+					break;
+				lock (cmds)
+					cmds.Enqueue(cmd);
 			}
-
-			Stopwatch stopwatch = Stopwatch.StartNew();
-			using (var client = new HttpClient())
-			{
-				client.MaxResponseContentBufferSize = 1;
-				var res = client.GetStreamAsync("https://aod.cos.tx.xmcdn.com/group80/M00/66/8C/wKgPEV7MksGBEkH8AJtZ211J2mk729-aacv2-48K.m4a")
-					.GetAwaiter()
-					.GetResult();
-				stopwatch.Stop();
-				Console.WriteLine(stopwatch.ElapsedMilliseconds);
-
-				Console.WriteLine(f.GetValue(res));
-			}
-
-			stopwatch = Stopwatch.StartNew();
-			using (var client = new HttpClient())
-			{
-				//client.MaxResponseContentBufferSize = 1;
-				var res = client.GetAsync("https://aod.cos.tx.xmcdn.com/group80/M00/66/8C/wKgPEV7MksGBEkH8AJtZ211J2mk729-aacv2-48K.m4a")
-					.GetAwaiter()
-					.GetResult();
-				stopwatch.Stop();
-				Console.WriteLine(stopwatch.ElapsedMilliseconds);
-				Console.WriteLine(res.Content.Headers.ContentLength);
-			}
-			Console.ReadLine();
 		}
 
 		/// <summary>
