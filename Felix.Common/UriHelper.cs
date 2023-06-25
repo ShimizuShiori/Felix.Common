@@ -2,7 +2,7 @@
 
 namespace Felix.Common
 {
-	public class UrlHelper
+	public class UriHelper
 	{
 		public static void Open(string url)
 		{

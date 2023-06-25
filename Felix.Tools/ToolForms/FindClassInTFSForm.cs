@@ -44,11 +44,11 @@ namespace Felix.Tools.ToolForms
 
 			if (text == "All")
 			{
-				UrlHelper.Open($"https://devops.wisetechglobal.com/wtg/_search?text={sText}&type=code");
+				UriHelper.Open($"https://devops.wisetechglobal.com/wtg/_search?text={sText}&type=code");
 			}
 			else
 			{
-				UrlHelper.Open($"https://devops.wisetechglobal.com/wtg/{btn.Text}/_search?text={sText}&type=code");
+				UriHelper.Open($"https://devops.wisetechglobal.com/wtg/{btn.Text}/_search?text={sText}&type=code");
 			}
 			this.Close();
 		}

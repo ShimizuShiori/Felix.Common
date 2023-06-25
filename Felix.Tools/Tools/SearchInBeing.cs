@@ -17,7 +17,7 @@ namespace Felix.Tools.Tools
 			if (selectedLang.Item1 == "")
 				return;
 
-			UrlHelper.Open($"https://cn.bing.com/search?q={UrlHelper.Encode(AppContext.SelectedText)}&ensearch={selectedLang.Item2}");
+			UriHelper.Open($"https://cn.bing.com/search?q={UriHelper.Encode(AppContext.SelectedText)}&ensearch={selectedLang.Item2}");
 			return;
 		}
 	}

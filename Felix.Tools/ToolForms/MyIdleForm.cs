@@ -14,7 +14,7 @@ namespace Felix.Tools.ToolForms
 
 		private void EdiProdForm_Shown(object? sender, EventArgs e)
 		{
-			UrlHelper.Open(url);
+			UriHelper.Open(url);
 			this.Close();
 		}
 	}

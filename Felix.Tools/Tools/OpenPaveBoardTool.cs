@@ -27,11 +27,11 @@ namespace Felix.Tools.Tools
 
 			if (mode == "Browser")
 			{
-				UrlHelper.Open($"https://webservices.wisetechglobal.com/Portals/PAV/Desktop#/formFlow/a2a6c1cf-cf54-4793-91ac-790314109fec/{boardNameToGuidMap[selectedBoardName]}");
+				UriHelper.Open($"https://webservices.wisetechglobal.com/Portals/PAV/Desktop#/formFlow/a2a6c1cf-cf54-4793-91ac-790314109fec/{boardNameToGuidMap[selectedBoardName]}");
 			}
 			else if (mode == "Window")
 			{
-				UrlHelper.Open($"https://svc-ediprod.wtg.zone/Services/link/ShowEditForm/VisualBoard/{boardNameToGuidMap[selectedBoardName]}?lang=en-gb");
+				UriHelper.Open($"https://svc-ediprod.wtg.zone/Services/link/ShowEditForm/VisualBoard/{boardNameToGuidMap[selectedBoardName]}?lang=en-gb");
 			}
 			return;
 		}

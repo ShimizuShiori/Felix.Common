@@ -8,7 +8,7 @@ namespace Felix.Tools.Tools.Runs
 	{
 		public void Start()
 		{
-			UrlHelper.Open("https://localhost/Glow/dev/login");
+			UriHelper.Open("https://localhost/Glow/dev/login");
 		}
 	}
 }

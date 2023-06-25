@@ -32,14 +32,14 @@ namespace Felix.Tools.Tools
 			if (selectedRepo == string.Empty)
 				return;
 
-			var sText = UrlHelper.Encode(String.Format(selectedFormat, AppContext.SelectedText));
+			var sText = UriHelper.Encode(String.Format(selectedFormat, AppContext.SelectedText));
 			if (selectedRepo == "All")
 			{
-				UrlHelper.Open($"https://devops.wisetechglobal.com/wtg/_search?text={sText}&type=code");
+				UriHelper.Open($"https://devops.wisetechglobal.com/wtg/_search?text={sText}&type=code");
 			}
 			else
 			{
-				UrlHelper.Open($"https://devops.wisetechglobal.com/wtg/{selectedRepo}/_search?text={sText}&type=code");
+				UriHelper.Open($"https://devops.wisetechglobal.com/wtg/{selectedRepo}/_search?text={sText}&type=code");
 			}
 		}
 	}

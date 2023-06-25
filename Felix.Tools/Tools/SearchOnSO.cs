@@ -12,7 +12,7 @@ namespace Felix.Tools.Tools
 			var content = AppContext.SelectedText
 				.Replace(" ", "+");
 			var url = string.Format(urlFormat, content);
-			UrlHelper.Open(url);
+			UriHelper.Open(url);
 		}
 	}
 }

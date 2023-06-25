@@ -20,7 +20,7 @@ namespace Felix.Tools.Tools
 			if (selected2 == "")
 				return;
 
-			UrlHelper.Open(string.Format(urlFormat, selected, selected2));
+			UriHelper.Open(string.Format(urlFormat, selected, selected2));
 		}
 	}
 }
