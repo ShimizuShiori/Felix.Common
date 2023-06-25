@@ -14,7 +14,7 @@ namespace Felix.Tools.Tools.Open
 			var id = match.Groups[0];
 			var type = match.Groups[1];
 			string uri = $"edient:Command=ShortCode&Id={id}&Type={type}";
-			UrlHelper.Open(uri);
+			UriHelper.Open(uri);
 		}
 	}
 }

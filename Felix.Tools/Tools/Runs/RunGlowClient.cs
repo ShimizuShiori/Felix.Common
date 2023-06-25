@@ -9,7 +9,7 @@ namespace Felix.Tools.Tools.Runs
 		public void Start()
 		{
 			ProcessHelper.Start("dotnet", @"run --project C:\git\wtg\Glow\Glow\DotNet\HTML\Client\Client\Client.csproj");
-			UrlHelper.Open("https://localhost:59415/CST");
+			UriHelper.Open("https://localhost:59415/CST");
 		}
 	}
 }
