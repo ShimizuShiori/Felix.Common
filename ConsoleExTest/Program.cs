@@ -68,15 +68,18 @@ namespace ConsoleExTest
 
 		static void Main(string[] args)
 		{
-			new Thread(() => MonitorCpuUsage("w3wp", 1000)).Start();
-			while (true)
-			{
-				var cmd = Console.ReadLine();
-				if (cmd == "exit")
-					break;
-				lock (cmds)
-					cmds.Enqueue(cmd);
-			}
+			int count = 4000;
+			AutoResetEvent e = new AutoResetEvent(false);
+			CountdownEvent cde = new CountdownEvent(count);
+			for (int i = 0; i < count; i++)
+				new Thread(() =>
+				{
+					cde.Signal();
+					e.WaitOne();
+				}).Start();
+			cde.Wait();
+			Console.WriteLine("All started");
+			e.Set();
 		}
 
 		/// <summary>

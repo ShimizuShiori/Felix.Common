@@ -7,7 +7,7 @@ namespace Felix.Tools.Tools.Open
 	[TextTool("WI", "Open", Reg)]
 	class OpenWi : ITool
 	{
-		public const string Reg = @"(WI)\d{8}";
+		public const string Reg = @"(WI|CS)\d{8}";
 		public void Start()
 		{
 			var match = Regex.Match(AppContext.SelectedText, Reg);

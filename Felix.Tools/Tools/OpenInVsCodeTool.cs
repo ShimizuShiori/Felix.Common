@@ -9,11 +9,12 @@ namespace Felix.Tools.Tools
 		Queue<string> solvingDirs = new Queue<string>();
 		HashSet<string> dirsToOpen = new HashSet<string>();
 		HashSet<string> handledPath = new HashSet<string>();
+		string fileDir = string.Empty;
 
 		IEnumerable<Func<DirectoryInfo, bool>> checkers = new Func<DirectoryInfo, bool>[]
 			{
-				HasCSProj,
 				HasSln,
+				HasCSProj,
 				HasPackageJson
 			};
 
@@ -24,6 +25,10 @@ namespace Felix.Tools.Tools
 				solvingDirs.Enqueue(path);
 			}
 			SolvePaths();
+			if (!dirsToOpen.Any())
+			{
+				dirsToOpen.Add(fileDir);
+			}
 			OpenByVSC();
 		}
 
@@ -60,6 +65,9 @@ namespace Felix.Tools.Tools
 					solvingDirs.Enqueue(parent);
 				return;
 			}
+
+			if (fileDir == string.Empty)
+				fileDir = dir.FullName;
 
 			if (!ShouldOpen(dir))
 			{
