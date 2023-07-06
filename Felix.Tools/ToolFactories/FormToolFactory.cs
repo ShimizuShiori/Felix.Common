@@ -45,5 +45,9 @@ namespace Felix.Tools.ToolFactories
 			return tools
 				.Where(x => x.Attribute.Show() && x.Attribute.Category == categoryName);
 		}
+
+		public void OnRunning()
+		{
+		}
 	}
 }

@@ -6,9 +6,9 @@ namespace Felix.Tools.Mapping
 	public class ExternalTool
 	{
 		[XmlAttribute]
-		public string Category { get; set; }
+		public string Category { get; set; } = string.Empty;
 		[XmlAttribute]
-		public string Name { get; set; }
+		public string Name { get; set; } = string.Empty;
 
 		[XmlElement("Exec")]
 		public string Exec { get; set; } = string.Empty;

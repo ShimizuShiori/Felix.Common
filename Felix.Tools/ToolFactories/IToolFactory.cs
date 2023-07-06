@@ -4,6 +4,7 @@ namespace Felix.Tools.ToolFactories
 {
 	interface IToolFactory
 	{
+		void OnRunning();
 		ITool CreateTool(string toolName);
 
 		IEnumerable<string> GetCategories();

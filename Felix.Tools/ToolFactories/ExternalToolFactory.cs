@@ -7,12 +7,8 @@ namespace Felix.Tools.ToolFactories
 {
 	class ExternalToolFactory : IToolFactory
 	{
-		readonly static ExternalToolCollection externalTools;
-		static ExternalToolFactory()
-		{
-			externalTools = XmlHelper.ToObject("./External.xml", new ExternalToolCollection());
-		}
-
+		static ExternalToolCollection externalTools = new ExternalToolCollection();
+		static DateTime lastWriteTime = DateTime.MinValue;
 
 		public ITool CreateTool(string toolName)
 		{
@@ -36,6 +32,24 @@ namespace Felix.Tools.ToolFactories
 			return externalTools
 				.Where(x => x.Category == categoryName)
 				.Select(x => new ToolInfo(new ToolAttribute(x.Name, x.Category), typeof(Tools.ExternalTool)));
+		}
+
+		public void OnRunning()
+		{
+			string path = Resources.GetResourcePath(Resources.ExternalXml);
+			var info = new FileInfo(path);
+			if (!info.Exists)
+			{
+				using (var stream = FSHelper.CreateFile(path))
+					if (stream != null)
+						XmlHelper.ToStream(new ExternalToolCollection(), stream);
+			}
+
+			if (lastWriteTime < info.LastWriteTime)
+			{
+				externalTools = XmlHelper.ToObject(path, new ExternalToolCollection());
+				lastWriteTime = info.LastWriteTime;
+			}
 		}
 	}
 }

@@ -44,5 +44,11 @@ namespace Felix.Tools.ToolFactories
 				toolInfos.AddRange(factory.GetToolInfosByCategory(categoryName));
 			return toolInfos.OrderBy(x => x.Attribute.Name);
 		}
+
+		public void OnRunning()
+		{
+			foreach (var f in subFactories)
+				f.OnRunning();
+		}
 	}
 }

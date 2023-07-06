@@ -15,6 +15,7 @@ namespace Felix.Tools
 		private void CategoryForm_Shown(object? sender, EventArgs e)
 		{
 			this.Hide();
+			AppContext.ToolFactory.OnRunning();
 			string selectedCategory = ChooesForm<string>.Show("Select a category",
 				AppContext.ToolFactory.GetCategories().ToMap(x => (x, x)), string.Empty);
 			if (selectedCategory == string.Empty)

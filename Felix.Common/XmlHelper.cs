@@ -19,5 +19,17 @@
 				return ToObject<T>(stream, defaultValue);
 			}
 		}
+
+		public static void ToStream<T>(T value, Stream stream)
+		{
+			var serializer = new System.Xml.Serialization.XmlSerializer(typeof(T));
+			serializer.Serialize(stream, value);
+		}
+
+		public static void ToFile<T>(T value, string path)
+		{
+			using (var stream = File.OpenWrite(path))
+				ToStream(value, stream);
+		}
 	}
 }
