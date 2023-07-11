@@ -1,5 +1,6 @@
 ﻿using Felix.Common;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -66,20 +67,34 @@ namespace ConsoleExTest
 			}
 		}
 
+		static bool isRunning = false;
+		static int c = 0;
+
+		static bool TryGetIndex([NotNullWhen(true)] out int index)
+		{
+			(var result, index) = c == 0 ? (true, 10000) : (false, -1);
+			return result;
+		}
+		static Action<Func<bool>, Action> GenerateDoubleCheckedRunner()
+		{
+			object syncObject = new object();
+			return new Action<Func<bool>, Action>((predicate, action) =>
+			{
+				if (predicate())
+				{
+					lock (syncObject)
+					{
+						if (predicate())
+						{
+							action();
+						}
+					}
+				}
+			});
+		}
 		static void Main(string[] args)
 		{
-			int count = 4000;
-			AutoResetEvent e = new AutoResetEvent(false);
-			CountdownEvent cde = new CountdownEvent(count);
-			for (int i = 0; i < count; i++)
-				new Thread(() =>
-				{
-					cde.Signal();
-					e.WaitOne();
-				}).Start();
-			cde.Wait();
-			Console.WriteLine("All started");
-			e.Set();
+			Console.ReadLine();
 		}
 
 		/// <summary>
