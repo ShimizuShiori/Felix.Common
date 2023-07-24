@@ -21,6 +21,16 @@
 			this.Text = title;
 			this.value = defaultValue;
 			this.textBox1.Text = value;
+			this.textBox1.KeyPress += TextBox1_KeyPress;
+		}
+
+		private void TextBox1_KeyPress(object? sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == '\r')
+			{
+				this.button3.PerformClick();
+				e.Handled = true;
+			}
 		}
 
 		private void InitializeComponent()

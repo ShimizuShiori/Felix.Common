@@ -30,7 +30,7 @@ namespace Felix.Tools.Tools
 
 			if (slns.Length == 1)
 			{
-				OpenDevenv(slns[0].FullName);
+				OpenDevenv(slns[0].FullName, path);
 			}
 			else
 			{
@@ -40,16 +40,16 @@ namespace Felix.Tools.Tools
 				if (selectedSln.Name == "NOT EXIST.txt")
 					return;
 
-				OpenDevenv(selectedSln.FullName);
+				OpenDevenv(selectedSln.FullName, path);
 			}
 			return;
 		}
 
-		void OpenDevenv(string path)
+		void OpenDevenv(string path, string filePath)
 		{
 			Process p = new Process();
 			p.StartInfo.FileName = @"C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\devenv.exe";
-			p.StartInfo.Arguments = path;
+			p.StartInfo.Arguments = $"{path} {filePath}";
 			p.StartInfo.UseShellExecute = true;
 			p.Start();
 		}

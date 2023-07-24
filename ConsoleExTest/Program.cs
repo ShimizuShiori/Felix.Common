@@ -1,8 +1,13 @@
 ﻿using Felix.Common;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Net.NetworkInformation;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 namespace ConsoleExTest
 {
@@ -94,6 +99,15 @@ namespace ConsoleExTest
 		}
 		static void Main(string[] args)
 		{
+			IPGlobalProperties ipProperties = IPGlobalProperties.GetIPGlobalProperties();
+			HashSet<int> ports = new HashSet<int>();
+			foreach (var x in ipProperties.GetActiveTcpListeners())
+			{
+				ports.Add(x.Port);
+			}
+			foreach (var p in ports)
+				Console.WriteLine(p);
+			Console.WriteLine("Fin");
 			Console.ReadLine();
 		}
 

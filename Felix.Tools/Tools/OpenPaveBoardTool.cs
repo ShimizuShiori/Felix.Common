@@ -10,7 +10,8 @@ namespace Felix.Tools.Tools
 
 		static OpenPaveBoardTool()
 		{
-			boardNameToGuidMap["GLOW"] = "f07ab6cf-183d-43ac-984d-7b9b1f47cb47";
+			// https://webservices.wisetechglobal.com/Portals/PAV/Desktop#/formFlow/991905a3-0202-475e-ba39-3c18fea186b2?entityPK=1767dc3a-1671-4821-ae10-a53624fb428b
+			boardNameToGuidMap["GLOW Nanjing"] = "1767dc3a-1671-4821-ae10-a53624fb428b";
 		}
 
 		public void Start()
@@ -27,7 +28,7 @@ namespace Felix.Tools.Tools
 
 			if (mode == "Browser")
 			{
-				UriHelper.Open($"https://webservices.wisetechglobal.com/Portals/PAV/Desktop#/formFlow/a2a6c1cf-cf54-4793-91ac-790314109fec/{boardNameToGuidMap[selectedBoardName]}");
+				UriHelper.Open($"https://webservices.wisetechglobal.com/Portals/PAV/Desktop#/formFlow/991905a3-0202-475e-ba39-3c18fea186b2/{boardNameToGuidMap[selectedBoardName]}");
 			}
 			else if (mode == "Window")
 			{
