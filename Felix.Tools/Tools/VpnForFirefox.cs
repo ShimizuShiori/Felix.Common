@@ -11,12 +11,12 @@ namespace Felix.Tools.Tools
 		const string regexText = @"user_pref\(""network\.proxy\.type"", \d\);";
 		public void Start()
 		{
-			var action = ChooesForm<string>.Show("On", "Off");
+			var action = ChooesForm<string>.Show("Enable", "Disable");
 			if (string.IsNullOrEmpty(action))
 				return;
 
 			var content = File.ReadAllText(path);
-			content = Regex.Replace(content, regexText, $@"user_pref(""network.proxy.type"", {(action == "On" ? 1 : 0)});");
+			content = Regex.Replace(content, regexText, $@"user_pref(""network.proxy.type"", {(action == "Enable" ? 1 : 0)});");
 			File.WriteAllText(path, content);
 
 
@@ -25,7 +25,10 @@ namespace Felix.Tools.Tools
 			{
 				foreach (var p in ps)
 					if (p != null)
+					{
 						p.CloseMainWindow();
+						p.WaitForExit();
+					}
 			}
 			finally
 			{

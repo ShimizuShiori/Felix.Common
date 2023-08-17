@@ -9,10 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="..\Felix.Common\Felix.Common.csproj" />
   </ItemGroup>
 

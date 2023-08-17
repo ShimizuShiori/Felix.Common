@@ -1,16 +1,35 @@
-﻿using Felix.Common;
+﻿using CargoWise.Glow.Index.Service.Utils;
+using Client;
+using ConsoleExTest;
+using Felix.Common;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Net.NetworkInformation;
-using System.Net;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using System.Net;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
+
+[assembly: UseConst(typeof(WhereExp))]
+[assembly: UseConst2()]
 
 namespace ConsoleExTest
 {
+	[AttributeUsage(AttributeTargets.Assembly)]
+	public class UseConstAttribute : Attribute
+	{
+		public Type Type { get; private set; }
+
+		public UseConstAttribute(Type type)
+		{
+			Type = type;
+		}
+	}
+
+	[AttributeUsage(AttributeTargets.Assembly)]
+	public class UseConst2Attribute : Attribute
+	{
+	}
+
 	internal class Program
 	{
 		static GitRunner runner = new GitRunner(@"C:\git\wtg\CargoWise\Dev");
@@ -97,17 +116,20 @@ namespace ConsoleExTest
 				}
 			});
 		}
-		static void Main(string[] args)
+
+		public static void Main(string[] args)
 		{
-			IPGlobalProperties ipProperties = IPGlobalProperties.GetIPGlobalProperties();
-			HashSet<int> ports = new HashSet<int>();
-			foreach (var x in ipProperties.GetActiveTcpListeners())
-			{
-				ports.Add(x.Port);
-			}
-			foreach (var p in ports)
-				Console.WriteLine(p);
-			Console.WriteLine("Fin");
+			//var builder = new SqlConnectionStringBuilder();
+			//builder.DataSource = ".";
+			//builder.InitialCatalog = "Odyssey";
+			//builder.IntegratedSecurity = true;
+			//using (var conn = new SqlConnection(builder.ConnectionString))
+			//{
+			//	conn.Open();
+			//	Console.WriteLine(DatabaseUtil.GetAppLock2(conn, "TEST", "Exclusive", "Session"));
+			//}
+			Console.WriteLine(true.ToString());
+			Console.WriteLine(false.ToString());
 			Console.ReadLine();
 		}
 
