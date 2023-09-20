@@ -5,9 +5,44 @@ using static Felix.Tools.Helpers.DocHelper;
 
 namespace Felix.Tools.Tools
 {
-	abstract class DocToolBase : ITool
+	[Tool("Manager", "Docs")]
+	class DocToolBase : ITool
 	{
-		public abstract void Start();
+		public void Start()
+		{
+			var action = ChooesForm<string>.Show("Open", "New", "Fin");
+			switch (action)
+			{
+				case "Open":
+					{
+						var wi = ChooseWorkItem();
+						if (wi == null)
+							return;
+						OpenWorkitem(wi);
+					}
+					break;
+				case "New":
+					{
+						var wiName = InputBox.Show("WorkItem", "");
+						if (string.IsNullOrEmpty(wiName))
+							return;
+
+						var docInfo = DocHelper.Create(wiName);
+						OpenWorkitem(docInfo);
+					}
+					break;
+				case "Fin":
+					{
+						var wi = ChooseWorkItem();
+						if (wi == null) return;
+
+						DocHelper.Finish(wi);
+					}
+					break;
+				default:
+					break;
+			}
+		}
 
 		protected DocInfo? ChooseWorkItem()
 		{
@@ -28,45 +63,6 @@ namespace Felix.Tools.Tools
 		protected void OpenWorkitem(DocInfo workItem)
 		{
 			VSCodeRunner.OpenFile(workItem.FullPath);
-		}
-	}
-
-
-	[Tool("Open", "Docs")]
-	class OpenDocTool : DocToolBase
-	{
-		public override void Start()
-		{
-			var wi = ChooseWorkItem();
-			if (wi == null)
-				return;
-			OpenWorkitem(wi);
-		}
-	}
-
-	[Tool("New", "Docs")]
-	class NewDocTool : DocToolBase
-	{
-		public override void Start()
-		{
-			var wiName = InputBox.Show("WorkItem", "");
-			if (string.IsNullOrEmpty(wiName))
-				return;
-
-			var docInfo = DocHelper.Create(wiName);
-			OpenWorkitem(docInfo);
-		}
-	}
-
-	[Tool("Fin", "Docs")]
-	class FinDocTool : DocToolBase
-	{
-		public override void Start()
-		{
-			var wi = ChooseWorkItem();
-			if (wi == null) return;
-
-			DocHelper.Finish(wi);
 		}
 	}
 }

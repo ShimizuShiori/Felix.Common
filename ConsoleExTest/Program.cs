@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 
 [assembly: UseConst(typeof(WhereExp))]
@@ -169,4 +170,20 @@ namespace ConsoleExTest
 			runner.RemoveWorktree(@"C:\git\wtg\CargoWise\Shared_FLF_WI00532049_EORIPrefix");
 		}
 	}
+}
+
+
+
+
+public interface IPrimaryKeyStore
+{
+	void DeleteTemporaryFiles(Func<string, bool> isPrimaryKeyFile);
+	IFileAccessor GetFileAccessor(string fileName);
+}
+
+public interface IFileAccessor : IDisposable
+{
+	void Delete();
+	byte[] Read();
+	void Write(byte[] buffer);
 }
