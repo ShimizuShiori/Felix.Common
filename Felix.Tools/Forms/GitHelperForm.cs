@@ -49,11 +49,6 @@ namespace Felix.Tools
 			}
 		}
 
-		private void TestForm_Load(object sender, EventArgs e)
-		{
-
-		}
-
 		void RunCommand(string command)
 		{
 			ThreadPool.QueueUserWorkItem(state =>
@@ -95,6 +90,16 @@ namespace Felix.Tools
 			});
 		}
 
+		string GetGitFilePath(string fileName) => Path.Combine(gitRepoPath, ".git", fileName);
+
+		string GetGitFileContent(string fileName) => File.ReadAllText(GetGitFilePath(fileName));
+
+		string GetRefBranchName()
+		{
+			var head = GetGitFileContent("HEAD");
+			return head.Trim().Replace("ref: refs/heads/", "");
+		}
+
 		private void BranchToMenuItem_Click(object sender, EventArgs e)
 		{
 			string branchName = InputBox.Show("Branch Name");
@@ -118,6 +123,7 @@ namespace Felix.Tools
 		private void clearToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			this.textBox1.Clear();
+			this.textBox1.AppendText(">> ");
 		}
 
 		private void pushToolStripMenuItem_Click(object sender, EventArgs e)

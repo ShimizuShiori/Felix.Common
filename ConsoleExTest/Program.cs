@@ -10,27 +10,8 @@ using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
 
-[assembly: UseConst(typeof(WhereExp))]
-[assembly: UseConst2()]
-
 namespace ConsoleExTest
 {
-	[AttributeUsage(AttributeTargets.Assembly)]
-	public class UseConstAttribute : Attribute
-	{
-		public Type Type { get; private set; }
-
-		public UseConstAttribute(Type type)
-		{
-			Type = type;
-		}
-	}
-
-	[AttributeUsage(AttributeTargets.Assembly)]
-	public class UseConst2Attribute : Attribute
-	{
-	}
-
 	internal class Program
 	{
 		static GitRunner runner = new GitRunner(@"C:\git\wtg\CargoWise\Dev");
@@ -118,20 +99,20 @@ namespace ConsoleExTest
 			});
 		}
 
-		public static void Main(string[] args)
+		static Task<int> GetValueAsync(string tableName)
 		{
-			//var builder = new SqlConnectionStringBuilder();
-			//builder.DataSource = ".";
-			//builder.InitialCatalog = "Odyssey";
-			//builder.IntegratedSecurity = true;
-			//using (var conn = new SqlConnection(builder.ConnectionString))
-			//{
-			//	conn.Open();
-			//	Console.WriteLine(DatabaseUtil.GetAppLock2(conn, "TEST", "Exclusive", "Session"));
-			//}
-			Console.WriteLine(true.ToString());
-			Console.WriteLine(false.ToString());
-			Console.ReadLine();
+			return Task.FromResult(10);
+		}
+
+		interface IA { }
+		class A : IA { }
+		class AA : IA { }
+
+		public static async Task Main(string[] args)
+		{
+			IA a = new A();
+			IA aa = a as A ?? throw new NotImplementedException();
+
 		}
 
 		/// <summary>

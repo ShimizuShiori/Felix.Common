@@ -7,11 +7,13 @@ namespace Felix.Tools.Tools
 	abstract class DbTool : ITool
 	{
 		protected const string DbNameOdyssey = "Odyssey";
+		protected const string DbNameOdysseyHYETIP = "OdysseyHYETIP";
 		protected virtual bool NeedToSelectADb { get; } = true;
 
 		protected string[] DbNameList = new string[]
 		{
-			DbNameOdyssey
+			DbNameOdyssey,
+			DbNameOdysseyHYETIP
 		};
 
 		public void Start()

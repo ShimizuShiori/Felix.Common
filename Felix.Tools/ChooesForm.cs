@@ -12,6 +12,7 @@ namespace Felix.Tools
 
 		protected ChooesForm(IDictionary<string, T> choices)
 		{
+			this.SuspendLayout();
 			this._choices = choices;
 			buttons = new List<Button>();
 			this.FormBorderStyle = FormBorderStyle.None;
@@ -25,13 +26,15 @@ namespace Felix.Tools
 			timer.Enabled = true;
 			timer.Tick += (sender, e) =>
 			{
-				timer.Interval = timer.Interval * 2;
+				//timer.Interval = timer.Interval * 2;
 				this.Activate();
 				this.buttons[0].Focus();
 				this.TopMost = true;
+				timer.Enabled = true;
 			};
 
 			DrawButtons();
+			this.ResumeLayout();
 		}
 
 		private void ChooesForm_Shown(object? sender, EventArgs e)
@@ -42,6 +45,7 @@ namespace Felix.Tools
 
 		void DrawButtons()
 		{
+			SuspendLayout();
 			this.Controls.Clear();
 			this.buttons.Clear();
 			var filteredChoices = _choices
@@ -49,7 +53,7 @@ namespace Felix.Tools
 				.ToMap(x => (x.Key, x.Value));
 			int count = filteredChoices.Count;
 			var size = (int)Math.Ceiling(Math.Sqrt(count)) + 1;
-			var keys = filteredChoices.Keys.OrderBy(x => x);
+			var keys = filteredChoices.Keys.OrderBy(x => x).ToList();
 			int index = 0;
 			bool over = false;
 			for (int rowIndex = 0; rowIndex < size; rowIndex++)
@@ -63,16 +67,18 @@ namespace Felix.Tools
 					}
 					if (over)
 						break;
-					DrawButton(filteredChoices, rowIndex, colIndex, keys, index++);
+					DrawButton(filteredChoices, rowIndex, colIndex, keys[index++]);
 				}
 				if (over)
 					break;
 			}
 			this.buttons[0].Focus();
+			this.buttons[0].KeyPress += Btn_KeyPress;
 			if (this.buttons.Count == 2)
 			{
 				this.buttons[0].PerformClick();
 			}
+			ResumeLayout();
 		}
 
 		void DrawExitButton(int rowIndex, int colIndex)
@@ -115,14 +121,14 @@ namespace Felix.Tools
 			}
 		}
 
-		void DrawButton(IDictionary<string, T> choicesForDraw, int rowIndex, int colIndex, IOrderedEnumerable<string> keys, int v)
+		void DrawButton(IDictionary<string, T> choicesForDraw, int rowIndex, int colIndex, string key)
 		{
 			var btn = new Button();
 			btn.Width = 300;
 			btn.Height = 300;
 			btn.Left = colIndex * 300;
 			btn.Top = rowIndex * 300;
-			btn.Text = keys.ElementAt(v);
+			btn.Text = key;
 			btn.Tag = choicesForDraw[btn.Text];
 			btn.Font = new Font(btn.Font.FontFamily, 15);
 			this.Controls.Add(btn);
@@ -136,7 +142,6 @@ namespace Felix.Tools
 				this.Close();
 			};
 			buttons.Add(btn);
-			btn.KeyPress += Btn_KeyPress;
 		}
 
 		public static T Show(string title, IDictionary<string, T> choices, T defaultValue)

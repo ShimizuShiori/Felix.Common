@@ -40,9 +40,8 @@
 	{
 		async static Task Main(string[] args)
 		{
-			// 这里怎么写 ?
-			//var s = new Screen();
-			//s.ShowHello();
+			string t = "Hello";
+			Console.WriteLine(t.GetHashCode());
 		}
 	}
 }
