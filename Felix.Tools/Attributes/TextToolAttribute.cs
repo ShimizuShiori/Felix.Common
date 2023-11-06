@@ -1,13 +1,33 @@
-﻿using System.Text.RegularExpressions;
+﻿using Felix.Tools.TextMatchers;
+using System.Text.RegularExpressions;
 
 namespace Felix.Tools.Attributes
 {
 	class TextToolAttribute : ToolAttribute
 	{
 		readonly string regex;
-		public TextToolAttribute(string name, string category, string regex = "") : base(name, category)
+		readonly ITextMatcher textMatcher;
+
+		public TextToolAttribute(string name, string category, Type? textMatcherType = null, string regex = "") : base(name, category)
 		{
 			this.regex = regex;
+			textMatcher = CreateTextMatcher(textMatcherType, regex);
+		}
+
+		static ITextMatcher CreateTextMatcher(Type? textMatcherType = null, string regex = "")
+		{
+			if (textMatcherType != null)
+			{
+				var obj = Activator.CreateInstance(textMatcherType);
+				if (obj is ITextMatcher m)
+					return m;
+				return new NullTextMatcher();
+			}
+			if (textMatcherType == null && string.IsNullOrEmpty(regex))
+				return new NullTextMatcher();
+
+			return new RegexTextMatcher(regex);
+
 		}
 
 		public override bool Show()
@@ -15,9 +35,8 @@ namespace Felix.Tools.Attributes
 			return base.Show()
 				&& AppContext.CopiedInfo is TextCopiedInfo t
 				&& !string.IsNullOrEmpty(t.Text)
-				&&
-					(string.IsNullOrEmpty(regex) || Regex.IsMatch(t.Text, regex))
-				;
+				&& textMatcher.IsMatch(t.Text);
+			;
 		}
 	}
 }
