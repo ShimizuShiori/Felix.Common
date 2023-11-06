@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Felix.Tools.Tools.DbTools.BOTools
 {
-	[TextTool("FullName", "BO", @"^[A-Z]+$")]
+	[TextTool("FullName", "BO", regex: @"^[A-Z]+$")]
 	class ShortNameToFullName : DbTool
 	{
 		protected override bool NeedToSelectADb => false;

@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Felix.Tools.Tools.DbTools
 {
-	[TextTool("TableInfo", "DB", @"^\S*$")]
+	[TextTool("TableInfo", "DB", regex: @"^\S*$")]
 	class ShowTableInfo : DbTool
 	{
 		protected override bool NeedToSelectADb => false;

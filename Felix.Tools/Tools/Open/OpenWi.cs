@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Felix.Tools.Tools.Open
 {
-	[TextTool("WI", "Open", Reg)]
+	[TextTool("WI", "Open", regex: Reg)]
 	class OpenWi : ITool
 	{
 		public const string Reg = @"(WI|CS)\d{8}";
