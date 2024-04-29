@@ -1,5 +1,6 @@
 ﻿using Felix.Tools.Attributes;
 using System.Diagnostics;
+using System.IO;
 
 namespace Felix.Tools.Tools
 {
@@ -34,12 +35,26 @@ namespace Felix.Tools.Tools
 
 		private void OpenByVSC()
 		{
+			if (dirsToOpen.Count == 1)
+			{
+				using (var p = new Process())
+				{
+					p.StartInfo.FileName = @"C:\Users\Felix.Fei\AppData\Local\Programs\Microsoft VS Code\Code.exe";
+					p.StartInfo.ArgumentList.Add(dirsToOpen.First());
+					if (AppContext.SelectedFilePathList.Count() == 1)
+					{
+						p.StartInfo.ArgumentList.Add(AppContext.SelectedFilePathList.First());
+					}
+					p.Start();
+				}
+				return;
+			}
 			foreach (var path in dirsToOpen)
 			{
 				using (var p = new Process())
 				{
 					p.StartInfo.FileName = @"C:\Users\Felix.Fei\AppData\Local\Programs\Microsoft VS Code\Code.exe";
-					p.StartInfo.Arguments = path;
+					p.StartInfo.ArgumentList.Add(path);
 					p.Start();
 				}
 			}

@@ -4,9 +4,9 @@ using Felix.Tools.Attributes;
 namespace Felix.Tools.Tools.SearchTools
 {
 	[TextTool("Being", "Search")]
-	class SearchInBeing : SearchTool
+	class SearchInBing : SearchTool
 	{
-		protected override void StartSearch(string keyword, string otherWord)
+		protected override void StartSearch(string keyword)
 		{
 			var lang = new (string, string)[]
 			{
@@ -17,7 +17,7 @@ namespace Felix.Tools.Tools.SearchTools
 			if (selectedLang.Item1 == "")
 				return;
 
-			UriHelper.Open($"https://cn.bing.com/search?q={UriHelper.Encode($"{keyword} {otherWord}")}&ensearch={selectedLang.Item2}");
+			UriHelper.Open($"https://cn.bing.com/search?q={UriHelper.Encode($"{keyword}")}&ensearch={selectedLang.Item2}");
 		}
 	}
 }

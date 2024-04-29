@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Felix.Tools.Tools.External
 {
-	[Tool("Edit", "External")]
+	[Tool("External", "Settings")]
 	class UpdateExternalXml : ITool
 	{
 		public void Start()

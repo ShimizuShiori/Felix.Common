@@ -1,85 +1,104 @@
 ﻿using Felix.Tools.Forms;
+using Felix.Tools.Logger;
 using Felix.Tools.ToolFactories;
 
 namespace Felix.Tools
 {
-	static class AppContext
-	{
-		static Queue<object> uiMessageQueue = new Queue<object>();
-		static List<IUiMessageListener> listeners = new List<IUiMessageListener>();
-		static object uiQueueLock = new object();
+    static class AppContext
+    {
+        static Queue<object> uiMessageQueue = new Queue<object>();
+        static List<IUiMessageListener> listeners = new List<IUiMessageListener>();
+        static object uiQueueLock = new object();
+        static readonly Dictionary<string, object> items = new Dictionary<string, object>();
 
-		public static ICopiedInfo CopiedInfo { get; set; } = NullCopiedInfo.Instance;
-		public static string SelectedCategory { get; set; } = string.Empty;
-		public static IToolFactory ToolFactory { get; } = new ToolFactory();
-		public static JobCounter JobCounter { get; } = new JobCounter();
-		public static Random Random { get; } = new Random();
-		public static string SelectedText
-		{
-			get
-			{
-				if (CopiedInfo is TextCopiedInfo t)
-				{
-					return t.Text;
-				}
-				else if (CopiedInfo is FilePathListCopiedInfo f)
-				{
-					return f.FilePathList[0];
-				}
-				return string.Empty;
-			}
-		}
-		public static string[] SelectedFilePathList
-		{
-			get
-			{
-				if (CopiedInfo is FilePathListCopiedInfo f)
-				{
-					return f.FilePathList;
-				}
-				return Array.Empty<string>();
-			}
-		}
+        public static ICopiedInfo CopiedInfo { get; set; } = NullCopiedInfo.Instance;
+        public static string SelectedCategory { get; set; } = string.Empty;
+        public static IToolFactory ToolFactory { get; } = new ToolFactory();
+        public static JobCounter JobCounter { get; } = new JobCounter();
+        public static Random Random { get; } = new Random();
+        public static Dictionary<string, object> Items { get => items; }
+        public static string SelectedText
+        {
+            get
+            {
+                if (CopiedInfo is TextCopiedInfo t)
+                {
+                    return t.Text;
+                }
+                else if (CopiedInfo is FilePathListCopiedInfo f)
+                {
+                    return f.FilePathList[0];
+                }
+                return string.Empty;
+            }
+        }
+        public static string[] SelectedFilePathList
+        {
+            get
+            {
+                if (CopiedInfo is FilePathListCopiedInfo f)
+                {
+                    return f.FilePathList;
+                }
+                return Array.Empty<string>();
+            }
+        }
 
-		static AppContext()
-		{
-			InitUiMessageHandler();
-		}
+        static AppContext()
+        {
+            InitUiMessageHandler();
+        }
 
-		private static void InitUiMessageHandler()
-		{
-			System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-			timer.Interval = 1000;
-			timer.Enabled = true;
-			timer.Tick += Timer_Tick;
-		}
+        private static void InitUiMessageHandler()
+        {
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Interval = 1000;
+            timer.Enabled = true;
+            timer.Tick += Timer_Tick;
+        }
 
-		private static void Timer_Tick(object? sender, EventArgs e)
-		{
-			Queue<object> queue = new Queue<object>();
+        private static void Timer_Tick(object? sender, EventArgs e)
+        {
+            Queue<object> queue = new Queue<object>();
 
-			lock (uiQueueLock)
-				while (uiMessageQueue.Count > 0)
-					queue.Enqueue(uiMessageQueue.Dequeue());
+            lock (uiQueueLock)
+                while (uiMessageQueue.Count > 0)
+                    queue.Enqueue(uiMessageQueue.Dequeue());
 
-			while (queue.Count > 0)
-			{
-				object message = queue.Dequeue();
-				foreach (var listener in listeners)
-					listener.OnMessage(message);
-			}
-		}
+            while (queue.Count > 0)
+            {
+                object message = queue.Dequeue();
+                foreach (var listener in listeners)
+                    listener.OnMessage(message);
+            }
+        }
 
-		public static void PublishUiMessage(object message)
-		{
-			lock (uiMessageQueue)
-				uiMessageQueue.Enqueue(message);
-		}
+        public static void PublishUiMessage(object message)
+        {
+            lock (uiMessageQueue)
+                uiMessageQueue.Enqueue(message);
+        }
 
-		public static IDisposable RegisterUiMessageListener(IUiMessageListener uiMessageListener)
-		{
-			listeners.Add(uiMessageListener);
-			return new ActionDisposable(() => listeners.Remove(uiMessageListener));
-		}
-	}
+        public static IDisposable RegisterUiMessageListener(IUiMessageListener uiMessageListener)
+        {
+            listeners.Add(uiMessageListener);
+            return new ActionDisposable(() => listeners.Remove(uiMessageListener));
+        }
+
+        public static ILogger CreateLogger(Type type)
+        {
+            var path = Path.Combine(TodayLogsFolder,
+                type.FullName + ".log");
+            var info = new FileInfo(path);
+            if (!info.Directory.Exists)
+            {
+                info.Directory.Create();
+            }
+            return new DefaultLogger(path);
+        }
+
+        public static string AppDataFolder { get; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FelixTool");
+        public static string LogsFolder { get; } = Path.Combine(AppDataFolder, "Logs");
+        public static string TodayLogsFolder { get; } = Path.Combine(LogsFolder, DateTime.Now.ToString("yyyy-MM-dd"));
+    }
 }

@@ -6,11 +6,10 @@
 		public void Start()
 		{
 			string keyword = AppContext.SelectedText;
-			string otherWord = InputBox.Show("Additional Words");
-			StartSearch(keyword, otherWord);
+			StartSearch(keyword);
 
 		}
 
-		protected abstract void StartSearch(string keyword, string otherWord);
+		protected abstract void StartSearch(string keyword);
 	}
 }
