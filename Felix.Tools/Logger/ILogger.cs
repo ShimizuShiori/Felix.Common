@@ -24,7 +24,7 @@ namespace Felix.Tools.Logger
                 {
                     using (var stream = new FileStream(filePath, FileMode.Append))
                     {
-                        var msg = $"[{DateTime.Now.ToShortTimeString()}] - {message}{Environment.NewLine}";
+                        var msg = $"[{DateTime.Now:HH:mm:ss}] - {message}{Environment.NewLine}";
                         byte[] buffer = Encoding.UTF8.GetBytes(msg);
                         stream.Write(buffer, 0, buffer.Length);
                     }

@@ -23,6 +23,7 @@ namespace Felix.Tools
 			InitializeComponent();
 			this.text = text;
 			this.textBox1.Text = text;
+			Clipboard.SetText(text);
 		}
 
 		public static void Show(string text, bool modal = true)

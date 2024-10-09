@@ -1,19 +1,25 @@
-﻿using System.Diagnostics;
+﻿using Felix.Tools.Tools;
+using System.Diagnostics;
 
-namespace Felix.Tools.Tools
+namespace Felix.Tools.Startups
 {
-    class ExternalTool : ITool
+    class DevopsAHK : IStartup
     {
-        readonly Felix.Tools.Mapping.ExternalTool tool;
-        Process process;
-
-        public ExternalTool(Felix.Tools.Mapping.ExternalTool tool)
+        Process p;
+        public void Dispose()
         {
-            this.tool = tool;
+            p.Kill();
+            p.Dispose();
         }
 
         public void Start()
         {
+            var tool = new Mapping.ExternalTool()
+            {
+                Category = "AKH",
+                Exec = "C:\\AHKs\\Devops.ahk",
+                Name = "Devops"
+            };
             string realExec = tool.Exec;
             string realArg = tool.Arg;
             foreach (var property in typeof(AppContext).GetProperties())
@@ -32,11 +38,9 @@ namespace Felix.Tools.Tools
             psi.Arguments = realArg;
             if (!string.IsNullOrEmpty(tool.WorkingDirectory))
                 psi.WorkingDirectory = tool.WorkingDirectory;
-            using (var process = new Process())
-            {
-                process.StartInfo = psi;
-                process.Start();
-            }
+            p = new Process();
+            p.StartInfo = psi;
+            p.Start();
         }
     }
 }

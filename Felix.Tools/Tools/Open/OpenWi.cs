@@ -10,7 +10,7 @@ namespace Felix.Tools.Tools.Open
 		public const string Reg = @"(WI|CS)\d{8}";
 		public void Start()
 		{
-			var match = Regex.Match(AppContext.SelectedText, Reg);
+			var match = Regex.Match(AppContext.SelectedText, Reg, RegexOptions.IgnoreCase);
 			var id = match.Groups[0];
 			var type = match.Groups[1];
 			string uri = $"edient:Command=ShortCode&Id={id}&Type={type}";

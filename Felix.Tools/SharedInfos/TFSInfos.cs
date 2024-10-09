@@ -1,37 +1,15 @@
 ﻿namespace Felix.Tools.SharedInfos
 {
-	static class TFSInfos
-	{
-		static readonly IDictionary<string, IEnumerable<string>> repos;
+    static class TFSInfos
+    {
+        public static IEnumerable<string> GetProjects()
+        {
+            return Directory.GetDirectories(@"C:\git\wtg").Select(x => Path.GetFileName(x)).Except(new string[] { "Github" }).OrderBy(x => x);
+        }
 
-		static TFSInfos()
-		{
-			repos = new Dictionary<string, IEnumerable<string>>();
-			repos["CargoWise"] = new string[]
-			{
-				"Dev",
-				"Shared"
-			};
-			repos["Glow"] = new string[]
-			{
-				"Glow",
-				"Shared"
-			};
-			repos["Shared"] = new string[]
-			{
-				"WTG.Foundation",
-				"WTG.ErrorReporting"
-			};
-		}
-
-		public static IEnumerable<string> GetProjects()
-		{
-			return repos.Keys;
-		}
-
-		public static IEnumerable<string> GetRepos(string project)
-		{
-			return repos[project];
-		}
-	}
+        public static IEnumerable<string> GetRepos(string project)
+        {
+            return Directory.GetDirectories($@"C:\git\wtg\{project}").Select(x => Path.GetFileName(x)).OrderBy(x => x);
+        }
+    }
 }

@@ -13,7 +13,7 @@ namespace Felix.Tools.TextMatchers
 
 		public bool IsMatch(string text)
 		{
-			return Regex.IsMatch(text, regex);
+			return Regex.IsMatch(text, regex, RegexOptions.IgnoreCase);
 		}
 	}
 }

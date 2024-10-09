@@ -1,4 +1,5 @@
 using Felix.Tools.Jobs;
+using Felix.Tools.Startups;
 using System.Diagnostics;
 
 namespace Felix.Tools
@@ -16,6 +17,7 @@ namespace Felix.Tools
                 MessageBox.Show("Felix.Tools.exe is running");
                 return;
             }
+
 
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
