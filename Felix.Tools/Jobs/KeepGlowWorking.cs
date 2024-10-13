@@ -35,12 +35,13 @@ namespace Felix.Tools.Jobs
                 using (var hc = new HttpClient())
                 {
                     var req = new HttpRequestMessage(HttpMethod.Get, url);
-                    await hc.SendAsync(req, cancellationToken);
+                    var response = await hc.SendAsync(req, cancellationToken);
+                    logger.Append($"Response.StatusCode = {response.StatusCode}");
                 }
             }
             catch (Exception ex)
             {
-                logger.Append($"Exception when visiting {url}: {ex.ToString()}");
+                logger.Append($"Exception when visiting {url}: {ex.Message}");
             }
         }
     }
