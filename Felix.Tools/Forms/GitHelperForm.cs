@@ -26,6 +26,7 @@ namespace Felix.Tools
 
 		public void OnMessage(object message)
 		{
+			Thread.Yield();
 			if (message is GitOutputMessage gom && gom.FormId == id)
 			{
 				this.textBox1.AppendText(gom.Message);
@@ -67,14 +68,16 @@ namespace Felix.Tools
 
 					p.Start();
 					while (true)
-					{
-						string? str = p.StandardOutput.ReadLine();
+                    {
+                        Thread.Yield();
+                        string? str = p.StandardOutput.ReadLine();
 						if (str == null)
 						{
 							int i = 0;
 							while (true)
-							{
-								string? err = p.StandardError.ReadLine();
+                            {
+                                Thread.Yield();
+                                string? err = p.StandardError.ReadLine();
 								if (err == null)
 									break;
 								if (i++ == 0)

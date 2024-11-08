@@ -59,7 +59,7 @@ namespace Felix.Tools.Jobs
                     finally
                     {
                         logger.Append($"Mouse @ ({p.Value.X}, {p.Value.Y})");
-                        await Task.Delay(TimeSpan.FromMinutes(1));
+                        await Task.Delay(TimeSpan.FromMinutes(5));
                     }
                 }
             }, TaskCreationOptions.LongRunning);
