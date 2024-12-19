@@ -115,8 +115,7 @@ namespace ConsoleExTest
 
         public static async Task Main(string[] args)
         {
-            var p = typeof(Foo).GetProperty("Id");
-            Console.WriteLine(Nullable.GetUnderlyingType(p.PropertyType));
+            ADTest.Start();
             Console.ReadLine();
         }
 
