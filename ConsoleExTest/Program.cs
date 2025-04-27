@@ -18,6 +18,8 @@ namespace ConsoleExTest
         static Queue<string> cmds = new Queue<string>();
         public static void MonitorCpuUsage(string processName, int interval)
         {
+            var a = new List<string>();
+
             var counterName = "% Processor Time";
             var categoryName = "Process";
             var instanceName = Process.GetProcessesByName(processName)[0].ProcessName;

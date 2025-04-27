@@ -4,7 +4,7 @@ using Felix.Tools.Tools;
 
 namespace Felix.Tools
 {
-	[Tool("GitHelper", "Repo")]
+	//[Tool("GitHelper", "Repo")]
 	public class OpenGitHelperForm : ITool
 	{
 		public void Start()
