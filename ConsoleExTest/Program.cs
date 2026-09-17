@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
+using System.Data.SqlClient;
 
 namespace ConsoleExTest
 {
@@ -11,15 +12,39 @@ namespace ConsoleExTest
 
 		static void Main(string[] args)
 		{
-			var ps = Process.GetProcessesByName("firefox");
-			string str = "/api/user/password/reset_request?t=1671007875";
+			var builder = new SqlConnectionStringBuilder();
+			builder.DataSource = ".";
+			builder.InitialCatalog = "Odyssey";
+			if (builder.InitialCatalog == "")
+				return;
+			builder.IntegratedSecurity = true;
+			using (var conn = new SqlConnection(builder.ToString()))
+			{
+				conn.Open();
+				var sqlTransaction = conn.BeginTransaction();
+				using (var cmd = conn.CreateCommand())
+				{
+					cmd.Transaction = sqlTransaction;
+					cmd.CommandText = $"DECLARE @R INT\nEXEC @R = sp_getapplock @Resource = @Resource, @LockMode = @LockMode\nSELECT @R";
 
-			Console.WriteLine(DateTimeOffset.Now.ToUnixTimeSeconds());
-			Console.WriteLine(MD5Encrypt32(str));
-			Console.ReadLine();
+					var p1 = cmd.CreateParameter();
+					p1.ParameterName = "Resource";
+					p1.Value = "Form1";
+					cmd.Parameters.Add(p1);
+
+					var p2 = cmd.CreateParameter();
+					p2.ParameterName = "LockMode";
+					p2.Value = "Shared";
+					cmd.Parameters.Add(p2);
+
+					var r = cmd.ExecuteScalar();
+
+					Console.WriteLine(r);
+				}
+			}
 		}
 
-		/// <summary>
+		/// <summary>d
 		/// 32位MD5加密
 		/// </summary>
 		/// <param name="password"></param>
